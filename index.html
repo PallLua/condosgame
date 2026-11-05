@@ -14,7 +14,7 @@
     }
 
     body {
-      background: #0b0e14; /* warna gelap modern */
+      background: #0b0e14;
       color: #e6edf3;
       min-height: 100vh;
       display: flex;
@@ -25,7 +25,6 @@
       background-image: radial-gradient(circle at 20% 30%, #1a2332 0%, #0b0e14 70%);
     }
 
-    /* ===== KONTAINER UTAMA ===== */
     .container {
       max-width: 600px;
       width: 100%;
@@ -68,7 +67,6 @@
       font-weight: 500;
     }
 
-    /* ===== DESKRIPSI ===== */
     .desc {
       text-align: center;
       font-size: 0.95rem;
@@ -78,73 +76,172 @@
       padding: 0 10px;
     }
 
-    /* ===== KARTU PROFIL ===== */
-    .profile-card {
-      background: rgba(30, 37, 48, 0.8);
+    /* ===== KARTU PROFIL ROBLOX ===== */
+    .roblox-profile-card {
+      background: rgba(30, 37, 48, 0.9);
       border-radius: 18px;
-      padding: 20px 22px;
+      padding: 24px;
       margin-bottom: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: transform 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
-    .profile-card:hover {
-      transform: scale(1.02);
-    }
-
-    .profile-card h2 {
-      font-size: 0.9rem;
-      color: #8b949e;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-
-    .profile-info {
+    .profile-top {
       display: flex;
-      align-items: center;
-      gap: 16px;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 20px;
     }
 
-    .avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #7ee8fa, #80ff72);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: #0b0e14;
+    .avatar-container {
+      position: relative;
       flex-shrink: 0;
     }
 
-    .profile-details .username {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .profile-details .handle {
-      font-size: 0.85rem;
-      color: #8b949e;
-      margin-bottom: 6px;
-    }
-
-    .profile-stats {
+    .roblox-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3a4a5e, #1e2530);
+      border: 3px solid #2d3a4b;
       display: flex;
-      gap: 16px;
-      font-size: 0.8rem;
-    }
-
-    .profile-stats span {
-      color: #c9d1d9;
-    }
-
-    .profile-stats strong {
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 800;
       color: #7ee8fa;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .online-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #80ff72;
+      border: 3px solid #1e2530;
+      box-shadow: 0 0 8px rgba(128, 255, 114, 0.6);
+    }
+
+    .profile-info-main {
+      flex: 1;
+    }
+
+    .profile-info-main .display-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .profile-info-main .username {
+      font-size: 0.9rem;
+      color: #8b949e;
+      margin-bottom: 8px;
+    }
+
+    .profile-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      color: #0b0e14;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .profile-bio {
+      font-size: 0.85rem;
+      color: #b1bac4;
+      line-height: 1.5;
+      margin-top: 8px;
+      border-left: 3px solid #7ee8fa;
+      padding-left: 10px;
+    }
+
+    /* Statistik Pertemanan */
+    .profile-stats-row {
+      display: flex;
+      gap: 20px;
+      padding: 15px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+
+    .stat-item .stat-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #e6edf3;
+    }
+
+    .stat-item .stat-label {
+      font-size: 0.75rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* Tombol Interaksi */
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .profile-actions button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
       font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-add-friend {
+      background: #00a2ff;
+      color: white;
+    }
+
+    .btn-add-friend:hover {
+      background: #0084d1;
+    }
+
+    .btn-join-game {
+      background: #00b06f;
+      color: white;
+    }
+
+    .btn-join-game:hover {
+      background: #00935c;
+    }
+
+    .btn-options {
+      flex: 0 0 50px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #b1bac4;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-options:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* ===== DAFTAR SERVER ===== */
@@ -274,7 +371,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* ===== INPUT IP (opsional) ===== */
+    /* ===== INPUT IP ===== */
     .ip-input {
       margin-top: 18px;
       display: flex;
@@ -321,8 +418,10 @@
     @media (max-width: 480px) {
       .container { padding: 24px 18px; }
       .header h1 { font-size: 1.8rem; }
-      .profile-info { flex-direction: column; align-items: flex-start; }
-      .profile-stats { flex-wrap: wrap; gap: 10px; }
+      .profile-top { flex-direction: column; align-items: center; text-align: center; }
+      .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px; }
+      .profile-actions { flex-wrap: wrap; }
+      .btn-options { flex: 1; }
     }
   </style>
 </head>
@@ -340,20 +439,50 @@
       Tempat masuk server, lihat player online, dan join game dengan tampilan animasi yang clean dan modern.
     </p>
 
-    <!-- KARTU PROFIL -->
-    <div class="profile-card">
-      <h2>My Profile</h2>
-      <div class="profile-info">
-        <div class="avatar">ig</div>
-        <div class="profile-details">
-          <div class="username">igxx66</div>
-          <div class="handle">@eidklso</div>
-          <div class="profile-stats">
-            <span><strong>67</strong> Friends</span>
-            <span><strong>3.1K</strong> Followers</span>
-            <span><strong>5</strong> Following</span>
+    <!-- KARTU PROFIL ROBLOX (BARU) -->
+    <div class="roblox-profile-card">
+      <div class="profile-top">
+        <div class="avatar-container">
+          <div class="roblox-avatar">Z</div>
+          <div class="online-dot" title="Online"></div>
+        </div>
+        <div class="profile-info-main">
+          <div class="display-name">Zeno</div>
+          <div class="username">@Zeno_Condo</div>
+          <span class="profile-badge">Premium Member</span>
+          <div class="profile-bio">
+            "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
           </div>
         </div>
+      </div>
+
+      <!-- Statistik -->
+      <div class="profile-stats-row">
+        <div class="stat-item">
+          <span class="stat-value">128</span>
+          <span class="stat-label">Friends</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">3.1K</span>
+          <span class="stat-label">Followers</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">45</span>
+          <span class="stat-label">Following</span>
+        </div>
+      </div>
+
+      <!-- Tombol Aksi -->
+      <div class="profile-actions">
+        <button class="btn-add-friend" onclick="alert('Friend request sent!')">
+          👤 Add Friend
+        </button>
+        <button class="btn-join-game" onclick="connectServer()">
+          🎮 Join Game
+        </button>
+        <button class="btn-options" onclick="alert('Options menu')">
+          ⋯
+        </button>
       </div>
     </div>
 
@@ -376,7 +505,7 @@
         <span class="spinner"></span> Connecting to SERVER 01...
       </div>
 
-      <!-- INPUT IP (opsional) -->
+      <!-- INPUT IP -->
       <div class="ip-input">
         <input type="text" placeholder="Masukkan IP server..." id="ipInput">
         <button onclick="connectServer()">Join</button>
@@ -424,28 +553,11 @@
       statusEl.innerHTML = `<span class="spinner"></span> Connecting to ${ip}...`;
       statusEl.style.color = '#8b949e';
 
-      // Simulasi proses koneksi (ganti dengan logika backend jika ada)
       setTimeout(() => {
         statusEl.innerHTML = `✅ Berhasil terhubung ke ${ip}!`;
         statusEl.style.color = '#80ff72';
       }, 2000);
     }
-
-    // ===== OPSIONAL: ANIMASI PLAYER MASUK SECARA BERKALA =====
-    // Uncomment jika ingin mensimulasikan player baru bergabung
-    /*
-    setInterval(() => {
-      const names = ['Rina', 'Budi', 'Sinta', 'Alex', 'Nadia'];
-      const randomName = names[Math.floor(Math.random() * names.length)];
-      const newPlayer = {
-        name: randomName,
-        initial: randomName.charAt(0).toUpperCase(),
-        online: true
-      };
-      players.push(newPlayer);
-      renderPlayers();
-    }, 10000); // setiap 10 detik
-    */
   </script>
 
 </body>
