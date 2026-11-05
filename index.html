@@ -143,7 +143,7 @@
       font-size: 0.9rem;
       color: #8b949e;
       margin-bottom: 8px;
-      word-break: break-all; /* Agar username panjang tidak merusak layout */
+      word-break: break-all;
     }
 
     .profile-badge {
@@ -511,20 +511,39 @@
   </div>
 
   <script>
-    // ===== KUMPULAN NAMA (POOL) =====
-    const namePool = [
+    // ===== KUMPULAN NAMA KHUSUS PER SERVER =====
+    
+    // Nama-nama untuk Server 1 (Campuran santai)
+    const server1Names = [
       'Joe', 'Hudson', 'Wayne', 'Alex', 'Budi', 'Sarah', 'Michael', 
       'David', 'Chris', 'Ryan', 'Leo', 'Maya', 'Zeno', 'Mika', 
       'Farel', 'Dinda', 'Rizky', 'Kevin', 'Justin', 'Brian'
     ];
 
+    // Nama-nama untuk Server 2 (Nuansa Anime / Cyber)
+    const server2Names = [
+      'Emiko', 'Sakura', 'Yuki', 'Hana', 'Kaito', 'Akira', 'Mei',
+      'Sora', 'Haru', 'Neko', 'Miku', 'Luna', 'Kira', 'Rei',
+      'Zero', 'Ichigo', 'Rin', 'Asuka', 'Kenji', 'Yumi'
+    ];
+
+    // Nama-nama untuk Server 3 (Nuansa Edgy / Gamer)
+    const server3Names = [
+      'Shadow', 'Viper', 'Raven', 'Blaze', 'Ghost', 'Fury', 'Striker',
+      'Rogue', 'Nova', 'Titan', 'Jinx', 'Sly', 'Karma', 'Zara',
+      'Axel', 'Reaper', 'Crimson', 'Hunter', 'Onyx', 'Zane'
+    ];
+
     // ===== FUNGSI RENDER PEMAIN =====
-    function renderPlayers(listId) {
+    // Fungsi ini sekarang menerima parameter `namesArray` agar bisa menggunakan nama khusus per server
+    function renderPlayers(listId, namesArray) {
       const playerList = document.getElementById(listId);
       if (!playerList) return;
 
-      // Acak nama dan tentukan jumlah pemain (3-6 orang)
-      const shuffledNames = [...namePool].sort(() => 0.5 - Math.random());
+      // Acak nama dari array yang diberikan
+      const shuffledNames = [...namesArray].sort(() => 0.5 - Math.random());
+      
+      // Tentukan jumlah pemain (3-6 orang agar terlihat ramai)
       const playerCount = Math.floor(Math.random() * 4) + 3; 
       const selectedPlayers = shuffledNames.slice(0, playerCount);
 
@@ -542,16 +561,16 @@
       });
     }
 
-    // Inisialisasi awal
-    renderPlayers('playerList1');
-    renderPlayers('playerList2');
-    renderPlayers('playerList3');
+    // Inisialisasi awal (Panggil dengan nama array yang sesuai)
+    renderPlayers('playerList1', server1Names);
+    renderPlayers('playerList2', server2Names);
+    renderPlayers('playerList3', server3Names);
 
-    // Looping tiap 2 detik
+    // Looping tiap 2 detik (Ganti nama di tiap server secara independen)
     setInterval(() => {
-      renderPlayers('playerList1');
-      renderPlayers('playerList2');
-      renderPlayers('playerList3');
+      renderPlayers('playerList1', server1Names);
+      renderPlayers('playerList2', server2Names);
+      renderPlayers('playerList3', server3Names);
     }, 2000);
 
     // ===== REDIRECT TO ROBLOX =====
