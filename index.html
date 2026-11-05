@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CONDOGAME — Server Game</title>
   <style>
-    /* ===== RESET & DASAR ===== */
+    /* ===== RESET & BASICS ===== */
     * {
       margin: 0;
       padding: 0;
@@ -76,7 +76,7 @@
       padding: 0 10px;
     }
 
-    /* ===== KARTU PROFIL ROBLOX ===== */
+    /* ===== ROBLOX PROFILE CARD ===== */
     .roblox-profile-card {
       background: rgba(30, 37, 48, 0.9);
       border-radius: 18px;
@@ -102,15 +102,20 @@
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #3a4a5e, #1e2530);
+      background: #2d3a4b;
       border: 3px solid #2d3a4b;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #7ee8fa;
       box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      overflow: hidden; /* Penting agar gambar tidak keluar dari lingkaran */
+    }
+
+    /* Tambahan CSS untuk gambar profil */
+    .roblox-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .online-dot {
@@ -163,7 +168,7 @@
       padding-left: 10px;
     }
 
-    /* Statistik Pertemanan */
+    /* Stats */
     .profile-stats-row {
       display: flex;
       gap: 20px;
@@ -194,7 +199,7 @@
       margin-top: 2px;
     }
 
-    /* Tombol Interaksi */
+    /* Buttons */
     .profile-actions {
       display: flex;
       gap: 10px;
@@ -244,7 +249,7 @@
       background: rgba(255, 255, 255, 0.1);
     }
 
-    /* ===== DAFTAR SERVER ===== */
+    /* ===== SERVERS LIST ===== */
     .servers-section h2 {
       font-size: 0.9rem;
       color: #8b949e;
@@ -342,7 +347,7 @@
       gap: 4px;
     }
 
-    /* ===== STATUS KONEKSI ===== */
+    /* ===== CONNECTION STATUS ===== */
     .connection-status {
       margin-top: 24px;
       text-align: center;
@@ -371,7 +376,7 @@
       to { transform: rotate(360deg); }
     }
 
-    /* ===== TOMBOL JOIN BESAR (BARU) ===== */
+    /* ===== LARGE JOIN BUTTON ===== */
     .btn-join-server-large {
       width: 100%;
       margin-top: 18px;
@@ -399,7 +404,7 @@
       transform: scale(0.97);
     }
 
-    /* ===== RESPONSIF ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 480px) {
       .container { padding: 24px 18px; }
       .header h1 { font-size: 1.8rem; }
@@ -419,16 +424,19 @@
       <div class="tagline">Online Condo Game • Fun Server</div>
     </div>
 
-    <!-- DESKRIPSI -->
+    <!-- DESCRIPTION -->
     <p class="desc">
-      Tempat masuk server, lihat player online, dan join game dengan tampilan animasi yang clean dan modern.
+      Your gateway to join servers, see online players, and hop into the game with a clean and modern interface.
     </p>
 
-    <!-- KARTU PROFIL ROBLOX -->
+    <!-- ROBLOX PROFILE CARD -->
     <div class="roblox-profile-card">
       <div class="profile-top">
         <div class="avatar-container">
-          <div class="roblox-avatar">Z</div>
+          <div class="roblox-avatar">
+            <!-- Pastikan gambar avatar.jpg sudah di-upload ke GitHub -->
+            <img src="avatar.jpg" alt="Zeno Profile">
+          </div>
           <div class="online-dot" title="Online"></div>
         </div>
         <div class="profile-info-main">
@@ -441,7 +449,7 @@
         </div>
       </div>
 
-      <!-- Statistik -->
+      <!-- Stats -->
       <div class="profile-stats-row">
         <div class="stat-item">
           <span class="stat-value">128</span>
@@ -457,12 +465,11 @@
         </div>
       </div>
 
-      <!-- Tombol Aksi -->
+      <!-- Actions -->
       <div class="profile-actions">
         <button class="btn-add-friend" onclick="alert('Friend request sent!')">
           👤 Add Friend
         </button>
-        <!-- Diubah agar memanggil fungsi joinRobloxServer -->
         <button class="btn-join-game" onclick="joinRobloxServer()">
           🎮 Join Game
         </button>
@@ -472,7 +479,7 @@
       </div>
     </div>
 
-    <!-- DAFTAR SERVER -->
+    <!-- SERVERS LIST -->
     <div class="servers-section">
       <h2>Servers</h2>
 
@@ -482,31 +489,31 @@
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
         <ul class="player-list" id="playerList">
-          <!-- Daftar player diisi oleh JS -->
+          <!-- Player list populated by JS -->
         </ul>
       </div>
 
-      <!-- STATUS KONEKSI (Muncul saat tombol diklik) -->
+      <!-- CONNECTION STATUS -->
       <div class="connection-status" id="connectionStatus" style="display: none;">
-        <span class="spinner"></span> Mengalihkan ke server Roblox...
+        <span class="spinner"></span> Redirecting to Roblox server...
       </div>
 
-      <!-- TOMBOL JOIN BESAR (PENGGANTI INPUT IP) -->
+      <!-- LARGE JOIN BUTTON -->
       <button class="btn-join-server-large" onclick="joinRobloxServer()">
-        🚀 Join Server Sekarang
+        Join Server Now
       </button>
     </div>
   </div>
 
   <script>
-    // ===== DATA PLAYER =====
+    // ===== PLAYER DATA =====
     const players = [
       { name: 'Zeno', initial: 'Z', online: true },
       { name: 'Mika', initial: 'M', online: true },
       { name: 'Farel', initial: 'F', online: true }
     ];
 
-    // ===== RENDER DAFTAR PLAYER =====
+    // ===== RENDER PLAYER LIST =====
     const playerList = document.getElementById('playerList');
 
     function renderPlayers() {
@@ -524,20 +531,14 @@
 
     renderPlayers();
 
-    // ===== FUNGSI JOIN KE LINK ROBLOX =====
+    // ===== REDIRECT TO ROBLOX =====
     function joinRobloxServer() {
-      // Link Roblox yang kamu minta
       const robloxUrl = 'https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01142270887766785768400829015736';
       
       const statusEl = document.getElementById('connectionStatus');
-      
-      // Tampilkan status loading
       statusEl.style.display = 'block';
       
-      // Beri jeda 1 detik agar user melihat animasi loading, lalu redirect
       setTimeout(() => {
-        // window.location.href akan membuka link di tab yang sama.
-        // Jika ingin membuka di tab baru, ganti dengan: window.open(robloxUrl, '_blank');
         window.location.href = robloxUrl;
       }, 1000); 
     }
