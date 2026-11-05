@@ -204,7 +204,6 @@
       gap: 10px;
     }
 
-    /* Menggabungkan selector button dan a agar desain tombol link sama */
     .profile-actions button,
     .profile-actions a.btn-add-friend {
       flex: 1;
@@ -219,7 +218,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      text-decoration: none; /* Menghilangkan garis bawah pada link */
+      text-decoration: none;
     }
 
     .btn-add-friend {
@@ -241,7 +240,7 @@
     }
 
     .btn-options {
-      flex: 0 0 50px !important; /* Memastikan tombol opsi tidak melebar */
+      flex: 0 0 50px !important;
       background: rgba(255, 255, 255, 0.05);
       color: #b1bac4;
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -309,6 +308,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      transition: opacity 0.3s ease;
     }
 
     .player-list li {
@@ -320,6 +320,7 @@
       padding: 6px 8px;
       border-radius: 8px;
       transition: background 0.2s;
+      animation: fadeIn 0.4s ease;
     }
 
     .player-list li:hover {
@@ -467,16 +468,12 @@
 
       <!-- Actions -->
       <div class="profile-actions">
-        <!-- Add Friend menjadi link (a) dan emoji dihapus -->
         <a href="https://www.roblox.rw/users/493909118271/profile" target="_blank" class="btn-add-friend">
           Add Friend
         </a>
-        
-        <!-- Join Game emoji dihapus -->
         <button class="btn-join-game" onclick="joinRobloxServer()">
           Join Game
         </button>
-        
         <button class="btn-options" onclick="alert('Options menu')">
           ⋯
         </button>
@@ -510,30 +507,48 @@
   </div>
 
   <script>
-    // ===== PLAYER DATA =====
-    const players = [
-      { name: 'Zeno', initial: 'Z', online: true },
-      { name: 'Mika', initial: 'M', online: true },
-      { name: 'Farel', initial: 'F', online: true }
+    // ===== KUMPULAN NAMA (POOL) =====
+    const namePool = [
+      'Joe', 'Hudson', 'Wayne', 'Alex', 'Budi', 'Sarah', 'Michael', 
+      'David', 'Chris', 'Ryan', 'Leo', 'Maya', 'Zeno', 'Mika', 
+      'Farel', 'Dinda', 'Rizky', 'Kevin', 'Justin', 'Brian'
     ];
 
-    // ===== RENDER PLAYER LIST =====
     const playerList = document.getElementById('playerList');
 
-    function renderPlayers() {
+    // ===== FUNGSI UNTUK MENGACAK DAN MERENDER PEMAIN =====
+    function updatePlayerList() {
+      // 1. Acak urutan nama di dalam pool
+      const shuffledNames = [...namePool].sort(() => 0.5 - Math.random());
+      
+      // 2. Tentukan jumlah pemain secara acak (misal: antara 3 sampai 6 orang agar terlihat ramai)
+      const playerCount = Math.floor(Math.random() * 4) + 3; 
+      
+      // 3. Ambil nama sebanyak jumlah pemain yang ditentukan
+      const selectedPlayers = shuffledNames.slice(0, playerCount);
+
+      // 4. Kosongkan list lama
       playerList.innerHTML = '';
-      players.forEach(player => {
+
+      // 5. Render pemain baru ke layar
+      selectedPlayers.forEach(playerName => {
+        const initial = playerName.charAt(0).toUpperCase();
         const li = document.createElement('li');
         li.innerHTML = `
-          <span class="player-avatar">${player.initial}</span>
-          <span>${player.name} joined the game</span>
+          <span class="player-avatar">${initial}</span>
+          <span>${playerName} joined the game</span>
           <span class="online-badge"><span class="dot"></span> online</span>
         `;
         playerList.appendChild(li);
       });
     }
 
-    renderPlayers();
+    // Jalankan pertama kali saat halaman dibuka
+    updatePlayerList();
+
+    // ===== LOOPING OTOMATIS =====
+    // Ganti daftar pemain setiap 2 detik (2000 milidetik)
+    setInterval(updatePlayerList, 2000);
 
     // ===== REDIRECT TO ROBLOX =====
     function joinRobloxServer() {
