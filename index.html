@@ -371,46 +371,31 @@
       to { transform: rotate(360deg); }
     }
 
-    /* ===== INPUT IP ===== */
-    .ip-input {
+    /* ===== TOMBOL JOIN BESAR (BARU) ===== */
+    .btn-join-server-large {
+      width: 100%;
       margin-top: 18px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .ip-input input {
-      flex: 1;
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(30, 37, 48, 0.8);
-      color: #e6edf3;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border 0.2s;
-    }
-
-    .ip-input input:focus {
-      border-color: #7ee8fa;
-    }
-
-    .ip-input button {
-      padding: 12px 20px;
+      padding: 16px;
       border-radius: 12px;
       border: none;
       background: linear-gradient(135deg, #7ee8fa, #80ff72);
       color: #0b0e14;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-weight: 800;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(128, 255, 114, 0.3);
     }
 
-    .ip-input button:hover {
+    .btn-join-server-large:hover {
       opacity: 0.9;
     }
 
-    .ip-input button:active {
+    .btn-join-server-large:active {
       transform: scale(0.97);
     }
 
@@ -439,7 +424,7 @@
       Tempat masuk server, lihat player online, dan join game dengan tampilan animasi yang clean dan modern.
     </p>
 
-    <!-- KARTU PROFIL ROBLOX (BARU) -->
+    <!-- KARTU PROFIL ROBLOX -->
     <div class="roblox-profile-card">
       <div class="profile-top">
         <div class="avatar-container">
@@ -477,7 +462,8 @@
         <button class="btn-add-friend" onclick="alert('Friend request sent!')">
           👤 Add Friend
         </button>
-        <button class="btn-join-game" onclick="connectServer()">
+        <!-- Diubah agar memanggil fungsi joinRobloxServer -->
+        <button class="btn-join-game" onclick="joinRobloxServer()">
           🎮 Join Game
         </button>
         <button class="btn-options" onclick="alert('Options menu')">
@@ -496,25 +482,24 @@
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
         <ul class="player-list" id="playerList">
-          <!-- Daftar player akan diisi oleh JavaScript -->
+          <!-- Daftar player diisi oleh JS -->
         </ul>
       </div>
 
-      <!-- STATUS KONEKSI -->
-      <div class="connection-status" id="connectionStatus">
-        <span class="spinner"></span> Connecting to SERVER 01...
+      <!-- STATUS KONEKSI (Muncul saat tombol diklik) -->
+      <div class="connection-status" id="connectionStatus" style="display: none;">
+        <span class="spinner"></span> Mengalihkan ke server Roblox...
       </div>
 
-      <!-- INPUT IP -->
-      <div class="ip-input">
-        <input type="text" placeholder="Masukkan IP server..." id="ipInput">
-        <button onclick="connectServer()">Join</button>
-      </div>
+      <!-- TOMBOL JOIN BESAR (PENGGANTI INPUT IP) -->
+      <button class="btn-join-server-large" onclick="joinRobloxServer()">
+        🚀 Join Server Sekarang
+      </button>
     </div>
   </div>
 
   <script>
-    // ===== DATA PLAYER (bisa kamu ganti) =====
+    // ===== DATA PLAYER =====
     const players = [
       { name: 'Zeno', initial: 'Z', online: true },
       { name: 'Mika', initial: 'M', online: true },
@@ -539,24 +524,22 @@
 
     renderPlayers();
 
-    // ===== SIMULASI KONEKSI =====
-    function connectServer() {
-      const ip = document.getElementById('ipInput').value.trim();
+    // ===== FUNGSI JOIN KE LINK ROBLOX =====
+    function joinRobloxServer() {
+      // Link Roblox yang kamu minta
+      const robloxUrl = 'https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01142270887766785768400829015736';
+      
       const statusEl = document.getElementById('connectionStatus');
-
-      if (!ip) {
-        statusEl.innerHTML = '⚠️ Masukkan IP server terlebih dahulu.';
-        statusEl.style.color = '#ff7b72';
-        return;
-      }
-
-      statusEl.innerHTML = `<span class="spinner"></span> Connecting to ${ip}...`;
-      statusEl.style.color = '#8b949e';
-
+      
+      // Tampilkan status loading
+      statusEl.style.display = 'block';
+      
+      // Beri jeda 1 detik agar user melihat animasi loading, lalu redirect
       setTimeout(() => {
-        statusEl.innerHTML = `✅ Berhasil terhubung ke ${ip}!`;
-        statusEl.style.color = '#80ff72';
-      }, 2000);
+        // window.location.href akan membuka link di tab yang sama.
+        // Jika ingin membuka di tab baru, ganti dengan: window.open(robloxUrl, '_blank');
+        window.location.href = robloxUrl;
+      }, 1000); 
     }
   </script>
 
