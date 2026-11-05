@@ -198,56 +198,41 @@
       margin-top: 2px;
     }
 
-    /* Buttons */
+    /* ===== BUTTONS ===== */
     .profile-actions {
       display: flex;
       gap: 10px;
+      justify-content: center; /* Memastikan tombol di tengah */
     }
 
-    .profile-actions button,
-    .profile-actions a.btn-add-friend {
+    /* Tombol Add Friend dipindah ke tengah dan dibuat full-width */
+    .btn-add-friend {
       flex: 1;
-      padding: 12px;
-      border-radius: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
       border: none;
-      font-weight: 700;
-      font-size: 0.9rem;
+      background: #00d2ff; /* Warna Cyan elegan */
+      color: #0b0e14;
+      font-weight: 800;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       text-decoration: none;
-    }
-
-    .btn-add-friend {
-      background: #00a2ff;
-      color: white;
+      letter-spacing: 0.5px;
     }
 
     .btn-add-friend:hover {
-      background: #0084d1;
+      background: #00b8e6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
     }
 
-    .btn-join-game {
-      background: #00b06f;
-      color: white;
-    }
-
-    .btn-join-game:hover {
-      background: #00935c;
-    }
-
-    .btn-options {
-      flex: 0 0 50px !important;
-      background: rgba(255, 255, 255, 0.05);
-      color: #b1bac4;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    }
-
-    .btn-options:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .btn-add-friend:active {
+      transform: translateY(0);
     }
 
     /* ===== SERVERS LIST ===== */
@@ -412,8 +397,6 @@
       .header h1 { font-size: 1.8rem; }
       .profile-top { flex-direction: column; align-items: center; text-align: center; }
       .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px; }
-      .profile-actions { flex-wrap: wrap; }
-      .btn-options { flex: 1 !important; }
     }
   </style>
 </head>
@@ -436,13 +419,13 @@
       <div class="profile-top">
         <div class="avatar-container">
           <div class="roblox-avatar">
-            <img src="Avatar.png" alt="Zeno Profile">
+            <img src="Avatar.png" alt="Profile Avatar">
           </div>
           <div class="online-dot" title="Online"></div>
         </div>
         <div class="profile-info-main">
-          <div class="display-name">Zeno</div>
-          <div class="username">@Zeno_Condo</div>
+          <div class="display-name">として</div>
+          <div class="username">@Applesharvested</div>
           <span class="profile-badge">Premium Member</span>
           <div class="profile-bio">
             "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
@@ -457,7 +440,7 @@
           <span class="stat-label">Friends</span>
         </div>
         <div class="stat-item">
-          <span class="stat-value">3.1K</span>
+          <span class="stat-value">354</span>
           <span class="stat-label">Followers</span>
         </div>
         <div class="stat-item">
@@ -466,17 +449,11 @@
         </div>
       </div>
 
-      <!-- Actions -->
+      <!-- Action Button -->
       <div class="profile-actions">
         <a href="https://www.roblox.rw/users/493909118271/profile" target="_blank" class="btn-add-friend">
           Add Friend
         </a>
-        <button class="btn-join-game" onclick="joinRobloxServer()">
-          Join Game
-        </button>
-        <button class="btn-options" onclick="alert('Options menu')">
-          ⋯
-        </button>
       </div>
     </div>
 
@@ -484,25 +461,52 @@
     <div class="servers-section">
       <h2>Servers</h2>
 
+      <!-- SERVER 01 -->
       <div class="server-card">
         <div class="server-header">
           <span class="server-name">SERVER 01</span>
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
-        <ul class="player-list" id="playerList">
-          <!-- Player list populated by JS -->
+        <ul class="player-list" id="playerList1">
+          <!-- Diisi oleh JS -->
         </ul>
+        <button class="btn-join-server-large" onclick="joinRobloxServer('server1')">
+          Join Server 01
+        </button>
+      </div>
+
+      <!-- SERVER 02 -->
+      <div class="server-card">
+        <div class="server-header">
+          <span class="server-name">SERVER 02</span>
+          <span class="server-status"><span class="dot"></span> Online</span>
+        </div>
+        <ul class="player-list" id="playerList2">
+          <!-- Diisi oleh JS -->
+        </ul>
+        <button class="btn-join-server-large" onclick="joinRobloxServer('server2')">
+          Join Server 02
+        </button>
+      </div>
+
+      <!-- SERVER 03 -->
+      <div class="server-card">
+        <div class="server-header">
+          <span class="server-name">SERVER 03</span>
+          <span class="server-status"><span class="dot"></span> Online</span>
+        </div>
+        <ul class="player-list" id="playerList3">
+          <!-- Diisi oleh JS -->
+        </ul>
+        <button class="btn-join-server-large" onclick="joinRobloxServer('server3')">
+          Join Server 03
+        </button>
       </div>
 
       <!-- CONNECTION STATUS -->
       <div class="connection-status" id="connectionStatus" style="display: none;">
         <span class="spinner"></span> Redirecting to Roblox server...
       </div>
-
-      <!-- LARGE JOIN BUTTON -->
-      <button class="btn-join-server-large" onclick="joinRobloxServer()">
-        Join Server Now
-      </button>
     </div>
   </div>
 
@@ -514,23 +518,18 @@
       'Farel', 'Dinda', 'Rizky', 'Kevin', 'Justin', 'Brian'
     ];
 
-    const playerList = document.getElementById('playerList');
+    // ===== FUNGSI RENDER PEMAIN =====
+    function renderPlayers(listId) {
+      const playerList = document.getElementById(listId);
+      if (!playerList) return;
 
-    // ===== FUNGSI UNTUK MENGACAK DAN MERENDER PEMAIN =====
-    function updatePlayerList() {
-      // 1. Acak urutan nama di dalam pool
+      // Acak nama dan tentukan jumlah pemain (3-6 orang)
       const shuffledNames = [...namePool].sort(() => 0.5 - Math.random());
-      
-      // 2. Tentukan jumlah pemain secara acak (misal: antara 3 sampai 6 orang agar terlihat ramai)
       const playerCount = Math.floor(Math.random() * 4) + 3; 
-      
-      // 3. Ambil nama sebanyak jumlah pemain yang ditentukan
       const selectedPlayers = shuffledNames.slice(0, playerCount);
 
-      // 4. Kosongkan list lama
       playerList.innerHTML = '';
 
-      // 5. Render pemain baru ke layar
       selectedPlayers.forEach(playerName => {
         const initial = playerName.charAt(0).toUpperCase();
         const li = document.createElement('li');
@@ -543,22 +542,34 @@
       });
     }
 
-    // Jalankan pertama kali saat halaman dibuka
-    updatePlayerList();
+    // Inisialisasi awal
+    renderPlayers('playerList1');
+    renderPlayers('playerList2');
+    renderPlayers('playerList3');
 
-    // ===== LOOPING OTOMATIS =====
-    // Ganti daftar pemain setiap 2 detik (2000 milidetik)
-    setInterval(updatePlayerList, 2000);
+    // Looping tiap 2 detik
+    setInterval(() => {
+      renderPlayers('playerList1');
+      renderPlayers('playerList2');
+      renderPlayers('playerList3');
+    }, 2000);
 
     // ===== REDIRECT TO ROBLOX =====
-    function joinRobloxServer() {
-      const robloxUrl = 'https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01142270887766785768400829015736';
-      
+    function joinRobloxServer(serverId) {
+      const urls = {
+        server1: 'https://www.roblox.rw/games/14153443454/Meet-a-neko?privateServerLinkCode=01142270887766785768400829015736',
+        server2: 'https://www.roblox.rw/games/139410450104051/Chat-with-AI-Emiko?privateServerLinkCode=01142270887766785768400829015736',
+        server3: 'https://www.roblox.rw/games/127764019442807/Repacked-Baddies?privateServerLinkCode=01142270887766785768400829015736'
+      };
+
+      const targetUrl = urls[serverId];
+      if (!targetUrl) return;
+
       const statusEl = document.getElementById('connectionStatus');
       statusEl.style.display = 'block';
       
       setTimeout(() => {
-        window.location.href = robloxUrl;
+        window.location.href = targetUrl;
       }, 1000); 
     }
   </script>
