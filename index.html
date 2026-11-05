@@ -108,10 +108,9 @@
       align-items: center;
       justify-content: center;
       box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-      overflow: hidden; /* Penting agar gambar tidak keluar dari lingkaran */
+      overflow: hidden;
     }
 
-    /* Tambahan CSS untuk gambar profil */
     .roblox-avatar img {
       width: 100%;
       height: 100%;
@@ -205,7 +204,9 @@
       gap: 10px;
     }
 
-    .profile-actions button {
+    /* Menggabungkan selector button dan a agar desain tombol link sama */
+    .profile-actions button,
+    .profile-actions a.btn-add-friend {
       flex: 1;
       padding: 12px;
       border-radius: 10px;
@@ -218,6 +219,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      text-decoration: none; /* Menghilangkan garis bawah pada link */
     }
 
     .btn-add-friend {
@@ -239,10 +241,10 @@
     }
 
     .btn-options {
-      flex: 0 0 50px;
+      flex: 0 0 50px !important; /* Memastikan tombol opsi tidak melebar */
       background: rgba(255, 255, 255, 0.05);
       color: #b1bac4;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
     .btn-options:hover {
@@ -392,7 +394,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       box-shadow: 0 4px 15px rgba(128, 255, 114, 0.3);
     }
 
@@ -411,7 +412,7 @@
       .profile-top { flex-direction: column; align-items: center; text-align: center; }
       .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px; }
       .profile-actions { flex-wrap: wrap; }
-      .btn-options { flex: 1; }
+      .btn-options { flex: 1 !important; }
     }
   </style>
 </head>
@@ -434,7 +435,6 @@
       <div class="profile-top">
         <div class="avatar-container">
           <div class="roblox-avatar">
-            <!-- Pastikan gambar avatar.png sudah di-upload ke GitHub -->
             <img src="Avatar.png" alt="Zeno Profile">
           </div>
           <div class="online-dot" title="Online"></div>
@@ -467,12 +467,16 @@
 
       <!-- Actions -->
       <div class="profile-actions">
-        <button class="btn-add-friend" onclick="alert('Friend request sent!')">
-          👤 Add Friend
-        </button>
+        <!-- Add Friend menjadi link (a) dan emoji dihapus -->
+        <a href="https://www.roblox.rw/users/493909118271/profile" target="_blank" class="btn-add-friend">
+          Add Friend
+        </a>
+        
+        <!-- Join Game emoji dihapus -->
         <button class="btn-join-game" onclick="joinRobloxServer()">
-          🎮 Join Game
+          Join Game
         </button>
+        
         <button class="btn-options" onclick="alert('Options menu')">
           ⋯
         </button>
