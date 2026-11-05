@@ -26,7 +26,6 @@
       pointer-events: none;
     }
 
-    /* Teks CONDOGAME tanpa kedip */
     .loader-text {
       font-size: 2.2rem;
       font-weight: 800;
@@ -38,7 +37,6 @@
       margin-bottom: 25px;
     }
 
-    /* Wadah Progress Bar */
     .progress-bar-container {
       width: 80%;
       max-width: 300px;
@@ -50,7 +48,6 @@
       box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
     }
 
-    /* Slider/Isi Progress Bar */
     .progress-bar-fill {
       height: 100%;
       width: 0%;
@@ -59,12 +56,11 @@
       transition: width 0.1s linear;
     }
 
-    /* Log teks berjalan */
     .loading-log {
       font-size: 0.85rem;
       color: #8b949e;
       font-family: 'Courier New', Courier, monospace;
-      height: 20px; /* Menjaga layout agar tidak goyang saat teks berubah */
+      height: 20px;
       text-align: center;
       letter-spacing: 1px;
     }
@@ -470,7 +466,7 @@
         <div class="profile-info-main">
           <div class="display-name">として</div>
           <div class="username">@real_pika0394058201840</div>
-          <span class="profile-badge">Owner Server Condo Map</span>
+          <span class="profile-badge">Premium Member</span>
           <div class="profile-bio">
             "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
           </div>
@@ -556,13 +552,12 @@
       const progressBar = document.getElementById('progressBar');
       const logText = document.getElementById('loadingLog');
       
-      const duration = 8000; // Total durasi 8 detik (8000 ms)
-      const intervalTime = 50; // Update setiap 50ms agar animasi mulus
-      const step = (100 / (duration / intervalTime)); // Kalkulasi pertambahan persen
+      const duration = 8000; // Total durasi 8 detik
+      const intervalTime = 50; 
+      const step = (100 / (duration / intervalTime)); 
       
       let progress = 0;
 
-      // Daftar log yang akan muncul di layar
       const messages = [
         { threshold: 0, text: "Initializing website..." },
         { threshold: 20, text: "Loading assets and resources..." },
@@ -575,26 +570,22 @@
       const progressInterval = setInterval(() => {
         progress += step;
         
-        // Jika mencapai 100%
         if (progress >= 100) {
           progress = 100;
           clearInterval(progressInterval);
           
           logText.textContent = "Ready! Redirecting...";
           
-          // Jalankan animasi fade-out
           setTimeout(() => {
             preloader.classList.add('fade-out');
             setTimeout(() => {
               preloader.remove();
-            }, 600); // Waktu tunggu memudar (0.6 detik)
-          }, 500); // Jeda setengah detik saat tulisan "Ready!"
+            }, 600); 
+          }, 500); 
         }
 
-        // Perbarui lebar progress bar
         progressBar.style.width = `${progress}%`;
 
-        // Perbarui teks log berdasarkan persentase
         for (let i = messages.length - 1; i >= 0; i--) {
           if (progress >= messages[i].threshold) {
             if (logText.textContent !== messages[i].text) {
@@ -660,18 +651,34 @@
       renderPlayers('playerList3', server3Names);
     }, 2000);
 
-    // ===== REDIRECT TO ROBLOX =====
+    // ===== REDIRECT TO ROBLOX (TRIK FORCE CHROME DI ANDROID) =====
     function joinRobloxServer(serverId) {
+      // Link g5.lu yang kamu berikan
       const urls = {
-        server1: 'https://shorturl.asia/vnsuxd',
-        server2: 'https://shorturl.asia/ru49w2',
-        server3: 'https://shorturl.asia/7wjtt3'
+        server1: 'https://g5.lu/t6vgf',
+        server2: 'https://g5.lu/dd87v',
+        server3: 'https://g5.lu/heebg'
       };
 
       const targetUrl = urls[serverId];
       if (!targetUrl) return;
 
-      window.location.href = targetUrl;
+      // Deteksi apakah pengunjung menggunakan OS Android
+      const isAndroid = /Android/i.test(navigator.userAgent);
+
+      if (isAndroid) {
+        // TRIK ANDROID: Memaksa buka di Google Chrome
+        // Menghapus 'https://' dari url
+        const cleanUrl = targetUrl.replace(/^https?:\/\//, '');
+        
+        // Format Intent untuk Chrome
+        const chromeIntentUrl = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;end`;
+        
+        window.location.href = chromeIntentUrl;
+      } else {
+        // Jika pengunjung pakai iPhone (iOS) atau PC
+        window.open(targetUrl, '_blank');
+      }
     }
   </script>
 
