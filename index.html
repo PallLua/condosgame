@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONDOGAME — Server Game</title>
+  <style>
+    /* ===== RESET & DASAR ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background: #0b0e14; /* warna gelap modern */
+      color: #e6edf3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-image: radial-gradient(circle at 20% 30%, #1a2332 0%, #0b0e14 70%);
+    }
+
+    /* ===== KONTAINER UTAMA ===== */
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: rgba(22, 27, 34, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header .tagline {
+      font-size: 0.85rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ===== DESKRIPSI ===== */
+    .desc {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #b1bac4;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+
+    /* ===== KARTU PROFIL ===== */
+    .profile-card {
+      background: rgba(30, 37, 48, 0.8);
+      border-radius: 18px;
+      padding: 20px 22px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .profile-card:hover {
+      transform: scale(1.02);
+    }
+
+    .profile-card h2 {
+      font-size: 0.9rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: #0b0e14;
+      flex-shrink: 0;
+    }
+
+    .profile-details .username {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .profile-details .handle {
+      font-size: 0.85rem;
+      color: #8b949e;
+      margin-bottom: 6px;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 0.8rem;
+    }
+
+    .profile-stats span {
+      color: #c9d1d9;
+    }
+
+    .profile-stats strong {
+      color: #7ee8fa;
+      font-weight: 700;
+    }
+
+    /* ===== DAFTAR SERVER ===== */
+    .servers-section h2 {
+      font-size: 0.9rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .server-card {
+      background: rgba(30, 37, 48, 0.8);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 16px;
+    }
+
+    .server-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .server-header .server-name {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .server-header .server-status {
+      font-size: 0.75rem;
+      color: #80ff72;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #80ff72;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .player-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .player-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .player-list li:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .player-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #2d3a4b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #7ee8fa;
+      flex-shrink: 0;
+    }
+
+    .online-badge {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: #80ff72;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===== STATUS KONEKSI ===== */
+    .connection-status {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #8b949e;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(30, 37, 48, 0.6);
+      border: 1px dashed rgba(126, 232, 250, 0.3);
+      animation: fadeIn 1.2s ease;
+    }
+
+    .connection-status .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(126, 232, 250, 0.2);
+      border-top-color: #7ee8fa;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== INPUT IP (opsional) ===== */
+    .ip-input {
+      margin-top: 18px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .ip-input input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(30, 37, 48, 0.8);
+      color: #e6edf3;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .ip-input input:focus {
+      border-color: #7ee8fa;
+    }
+
+    .ip-input button {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      color: #0b0e14;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .ip-input button:hover {
+      opacity: 0.9;
+    }
+
+    .ip-input button:active {
+      transform: scale(0.97);
+    }
+
+    /* ===== RESPONSIF ===== */
+    @media (max-width: 480px) {
+      .container { padding: 24px 18px; }
+      .header h1 { font-size: 1.8rem; }
+      .profile-info { flex-direction: column; align-items: flex-start; }
+      .profile-stats { flex-wrap: wrap; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER -->
+    <div class="header">
+      <h1>CONDOGAME</h1>
+      <div class="tagline">Online Condo Game • Fun Server</div>
+    </div>
+
+    <!-- DESKRIPSI -->
+    <p class="desc">
+      Tempat masuk server, lihat player online, dan join game dengan tampilan animasi yang clean dan modern.
+    </p>
+
+    <!-- KARTU PROFIL -->
+    <div class="profile-card">
+      <h2>My Profile</h2>
+      <div class="profile-info">
+        <div class="avatar">ig</div>
+        <div class="profile-details">
+          <div class="username">igxx66</div>
+          <div class="handle">@eidklso</div>
+          <div class="profile-stats">
+            <span><strong>67</strong> Friends</span>
+            <span><strong>3.1K</strong> Followers</span>
+            <span><strong>5</strong> Following</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAFTAR SERVER -->
+    <div class="servers-section">
+      <h2>Servers</h2>
+
+      <div class="server-card">
+        <div class="server-header">
+          <span class="server-name">SERVER 01</span>
+          <span class="server-status"><span class="dot"></span> Online</span>
+        </div>
+        <ul class="player-list" id="playerList">
+          <!-- Daftar player akan diisi oleh JavaScript -->
+        </ul>
+      </div>
+
+      <!-- STATUS KONEKSI -->
+      <div class="connection-status" id="connectionStatus">
+        <span class="spinner"></span> Connecting to SERVER 01...
+      </div>
+
+      <!-- INPUT IP (opsional) -->
+      <div class="ip-input">
+        <input type="text" placeholder="Masukkan IP server..." id="ipInput">
+        <button onclick="connectServer()">Join</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== DATA PLAYER (bisa kamu ganti) =====
+    const players = [
+      { name: 'Zeno', initial: 'Z', online: true },
+      { name: 'Mika', initial: 'M', online: true },
+      { name: 'Farel', initial: 'F', online: true }
+    ];
+
+    // ===== RENDER DAFTAR PLAYER =====
+    const playerList = document.getElementById('playerList');
+
+    function renderPlayers() {
+      playerList.innerHTML = '';
+      players.forEach(player => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="player-avatar">${player.initial}</span>
+          <span>${player.name} joined the game</span>
+          <span class="online-badge"><span class="dot"></span> online</span>
+        `;
+        playerList.appendChild(li);
+      });
+    }
+
+    renderPlayers();
+
+    // ===== SIMULASI KONEKSI =====
+    function connectServer() {
+      const ip = document.getElementById('ipInput').value.trim();
+      const statusEl = document.getElementById('connectionStatus');
+
+      if (!ip) {
+        statusEl.innerHTML = '⚠️ Masukkan IP server terlebih dahulu.';
+        statusEl.style.color = '#ff7b72';
+        return;
+      }
+
+      statusEl.innerHTML = `<span class="spinner"></span> Connecting to ${ip}...`;
+      statusEl.style.color = '#8b949e';
+
+      // Simulasi proses koneksi (ganti dengan logika backend jika ada)
+      setTimeout(() => {
+        statusEl.innerHTML = `✅ Berhasil terhubung ke ${ip}!`;
+        statusEl.style.color = '#80ff72';
+      }, 2000);
+    }
+
+    // ===== OPSIONAL: ANIMASI PLAYER MASUK SECARA BERKALA =====
+    // Uncomment jika ingin mensimulasikan player baru bergabung
+    /*
+    setInterval(() => {
+      const names = ['Rina', 'Budi', 'Sinta', 'Alex', 'Nadia'];
+      const randomName = names[Math.floor(Math.random() * names.length)];
+      const newPlayer = {
+        name: randomName,
+        initial: randomName.charAt(0).toUpperCase(),
+        online: true
+      };
+      players.push(newPlayer);
+      renderPlayers();
+    }, 10000); // setiap 10 detik
+    */
+  </script>
+
+</body>
+</html>
