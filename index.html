@@ -12,7 +12,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #fff0f5; /* Pink sangat muda */
+      background: #fff0f5;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -352,7 +352,7 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
-    /* ===== MEDIA CONTAINER (BARU) ===== */
+    /* ===== MEDIA CONTAINER ===== */
     .server-media-container {
       width: 100%;
       height: 180px;
@@ -374,7 +374,7 @@
 
     .server-media-container:hover img,
     .server-media-container:hover video {
-      transform: scale(1.05); /* Efek zoom saat di-hover */
+      transform: scale(1.05);
     }
 
     /* ===== PLAYER LIST ===== */
@@ -402,18 +402,24 @@
       background: #fff0f5;
     }
 
+    /* CSS UNTUK FOTO PROFIL PEMAIN (AVATAR) */
     .player-avatar {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background: #ffe6f0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #ff3385;
+      overflow: hidden;
       flex-shrink: 0;
+      border: 1px solid #ffb6c1;
+    }
+
+    .player-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .online-badge {
@@ -539,19 +545,11 @@
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
         
-        <!-- MEDIA SERVER 1 (Ganti src dengan link foto/gif/video kamu) -->
         <div class="server-media-container">
-          <!-- Contoh menggunakan GIF yang bergerak -->
           <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif" alt="Server 1 Preview">
-          
-          <!-- ATAU jika pakai video MP4, gunakan kode ini (hapus komentar):
-          <video src="link-video-kamu.mp4" autoplay loop muted playsinline></video>
-          -->
         </div>
 
-        <ul class="player-list" id="playerList1">
-          <!-- Diisi oleh JS -->
-        </ul>
+        <ul class="player-list" id="playerList1"></ul>
         <button class="btn-join-server-large" onclick="joinRobloxServer('server1')">
           Join Server 01
         </button>
@@ -564,15 +562,11 @@
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
         
-        <!-- MEDIA SERVER 2 -->
         <div class="server-media-container">
-          <!-- Ganti src dengan link foto/gif/video kamu -->
           <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3q2K5jinAlChoCLS/giphy.gif" alt="Server 2 Preview">
         </div>
 
-        <ul class="player-list" id="playerList2">
-          <!-- Diisi oleh JS -->
-        </ul>
+        <ul class="player-list" id="playerList2"></ul>
         <button class="btn-join-server-large" onclick="joinRobloxServer('server2')">
           Join Server 02
         </button>
@@ -585,15 +579,11 @@
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
         
-        <!-- MEDIA SERVER 3 -->
         <div class="server-media-container">
-          <!-- Ganti src dengan link foto/gif/video kamu -->
           <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tPplGWjN0xLybiU/giphy.gif" alt="Server 3 Preview">
         </div>
 
-        <ul class="player-list" id="playerList3">
-          <!-- Diisi oleh JS -->
-        </ul>
+        <ul class="player-list" id="playerList3"></ul>
         <button class="btn-join-server-large" onclick="joinRobloxServer('server3')">
           Join Server 03
         </button>
@@ -602,13 +592,13 @@
   </div>
 
   <script>
-    // ===== PRELOADER LOGIC (SLIDER & LOGS) =====
+    // ===== PRELOADER LOGIC =====
     window.addEventListener('load', () => {
       const preloader = document.getElementById('preloader');
       const progressBar = document.getElementById('progressBar');
       const logText = document.getElementById('loadingLog');
       
-      const duration = 8000; // Total durasi 8 detik
+      const duration = 8000; 
       const intervalTime = 50; 
       const step = (100 / (duration / intervalTime)); 
       
@@ -672,6 +662,15 @@
       'Axel', 'Reaper', 'Crimson', 'Hunter', 'Onyx', 'Zane'
     ];
 
+    // ===== KUMPULAN FOTO PROFIL ROBLOX NOOB (BACON HAIR) =====
+    // Kamu bisa menambahkan atau mengganti link foto di bawah ini
+    const robloxAvatars = [
+      'https://i.imgur.com/5mP0w6m.png', // Cowok Bacon Hair
+      'https://i.imgur.com/9sK4c2o.png', // Cewek Bacon Hair
+      'https://i.imgur.com/8QO5H8n.png', // Cowok Bacon Hair 2
+      'https://i.imgur.com/kXW2Y9m.png'  // Cewek Bacon Hair 2
+    ];
+
     // ===== FUNGSI RENDER PEMAIN =====
     function renderPlayers(listId, namesArray) {
       const playerList = document.getElementById(listId);
@@ -684,10 +683,14 @@
       playerList.innerHTML = '';
 
       selectedPlayers.forEach(playerName => {
-        const initial = playerName.charAt(0).toUpperCase();
+        // Pilih foto profil secara acak dari daftar di atas
+        const randomAvatarUrl = robloxAvatars[Math.floor(Math.random() * robloxAvatars.length)];
+        
         const li = document.createElement('li');
         li.innerHTML = `
-          <span class="player-avatar">${initial}</span>
+          <span class="player-avatar">
+            <img src="${randomAvatarUrl}" alt="${playerName}">
+          </span>
           <span>${playerName} joined the game</span>
           <span class="online-badge"><span class="dot"></span> online</span>
         `;
