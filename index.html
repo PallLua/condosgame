@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CONDOGAME — Server Game</title>
   <style>
-    /* ===== PRELOADER (LOADING SCREEN) ===== */
+    /* ===== PRELOADER (PINK & WHITE THEME) ===== */
     #preloader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #0b0e14;
+      background: #fff0f5; /* Pink sangat muda */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -30,7 +30,7 @@
       font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: 2px;
-      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      background: linear-gradient(135deg, #ff66b2, #ff99cc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -41,24 +41,24 @@
       width: 80%;
       max-width: 300px;
       height: 10px;
-      background: #1e2530;
+      background: #ffe6f0;
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: 15px;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+      box-shadow: inset 0 2px 4px rgba(255, 102, 178, 0.2);
     }
 
     .progress-bar-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #7ee8fa, #80ff72);
+      background: linear-gradient(90deg, #ff66b2, #ff99cc);
       border-radius: 5px;
       transition: width 0.1s linear;
     }
 
     .loading-log {
       font-size: 0.85rem;
-      color: #8b949e;
+      color: #d63384;
       font-family: 'Courier New', Courier, monospace;
       height: 20px;
       text-align: center;
@@ -74,26 +74,26 @@
     }
 
     body {
-      background: #0b0e14;
-      color: #e6edf3;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffe6f0 100%);
+      color: #4a4a4a;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background-image: radial-gradient(circle at 20% 30%, #1a2332 0%, #0b0e14 70%);
+      background-attachment: fixed;
     }
 
     .container {
       max-width: 600px;
       width: 100%;
-      background: rgba(22, 27, 34, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       border-radius: 24px;
       padding: 32px 28px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 40px rgba(255, 102, 178, 0.15);
+      border: 1px solid rgba(255, 182, 193, 0.5);
       animation: fadeIn 0.8s ease;
     }
 
@@ -112,7 +112,7 @@
       font-size: 2.4rem;
       font-weight: 800;
       letter-spacing: 2px;
-      background: linear-gradient(135deg, #7ee8fa, #80ff72);
+      background: linear-gradient(135deg, #ff66b2, #ff99cc);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -120,17 +120,17 @@
 
     .header .tagline {
       font-size: 0.85rem;
-      color: #8b949e;
+      color: #d63384;
       text-transform: uppercase;
       letter-spacing: 3px;
       margin-top: 4px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .desc {
       text-align: center;
       font-size: 0.95rem;
-      color: #b1bac4;
+      color: #666;
       line-height: 1.6;
       margin-bottom: 30px;
       padding: 0 10px;
@@ -138,12 +138,12 @@
 
     /* ===== ROBLOX PROFILE CARD ===== */
     .roblox-profile-card {
-      background: rgba(30, 37, 48, 0.9);
+      background: #ffffff;
       border-radius: 18px;
       padding: 24px;
       margin-bottom: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 1px solid #ffb6c1;
+      box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
     }
 
     .profile-top {
@@ -162,12 +162,12 @@
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      background: #2d3a4b;
-      border: 3px solid #2d3a4b;
+      background: #ffe6f0;
+      border: 3px solid #ff99cc;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 10px rgba(255, 102, 178, 0.2);
       overflow: hidden;
     }
 
@@ -184,9 +184,9 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: #80ff72;
-      border: 3px solid #1e2530;
-      box-shadow: 0 0 8px rgba(128, 255, 114, 0.6);
+      background: #ff3385;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 8px rgba(255, 51, 133, 0.6);
     }
 
     .profile-info-main {
@@ -197,19 +197,20 @@
       font-size: 1.4rem;
       font-weight: 800;
       line-height: 1.2;
+      color: #d63384;
     }
 
     .profile-info-main .username {
       font-size: 0.9rem;
-      color: #8b949e;
+      color: #888;
       margin-bottom: 8px;
       word-break: break-all;
     }
 
     .profile-badge {
       display: inline-block;
-      background: linear-gradient(135deg, #7ee8fa, #80ff72);
-      color: #0b0e14;
+      background: linear-gradient(135deg, #ff66b2, #ff3385);
+      color: white;
       font-size: 0.7rem;
       font-weight: 800;
       padding: 3px 8px;
@@ -221,10 +222,10 @@
 
     .profile-bio {
       font-size: 0.85rem;
-      color: #b1bac4;
+      color: #666;
       line-height: 1.5;
       margin-top: 8px;
-      border-left: 3px solid #7ee8fa;
+      border-left: 3px solid #ff99cc;
       padding-left: 10px;
     }
 
@@ -233,8 +234,8 @@
       display: flex;
       gap: 20px;
       padding: 15px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid #ffe6f0;
+      border-bottom: 1px solid #ffe6f0;
       margin-bottom: 20px;
     }
 
@@ -248,12 +249,12 @@
     .stat-item .stat-value {
       font-size: 1.1rem;
       font-weight: 800;
-      color: #e6edf3;
+      color: #d63384;
     }
 
     .stat-item .stat-label {
       font-size: 0.75rem;
-      color: #8b949e;
+      color: #888;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-top: 2px;
@@ -272,8 +273,8 @@
       padding: 14px 20px;
       border-radius: 12px;
       border: none;
-      background: #00d2ff;
-      color: #0b0e14;
+      background: #ff66b2;
+      color: white;
       font-weight: 800;
       font-size: 1rem;
       cursor: pointer;
@@ -286,9 +287,9 @@
     }
 
     .btn-add-friend:hover {
-      background: #00b8e6;
+      background: #ff3385;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
+      box-shadow: 0 6px 20px rgba(255, 51, 133, 0.3);
     }
 
     .btn-add-friend:active {
@@ -298,19 +299,20 @@
     /* ===== SERVERS LIST ===== */
     .servers-section h2 {
       font-size: 0.9rem;
-      color: #8b949e;
+      color: #d63384;
       text-transform: uppercase;
       letter-spacing: 1.5px;
       margin-bottom: 14px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .server-card {
-      background: rgba(30, 37, 48, 0.8);
+      background: #ffffff;
       border-radius: 16px;
       padding: 18px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid #ffb6c1;
       margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
     }
 
     .server-header {
@@ -321,24 +323,26 @@
     }
 
     .server-header .server-name {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1rem;
       letter-spacing: 0.5px;
+      color: #d63384;
     }
 
     .server-header .server-status {
       font-size: 0.75rem;
-      color: #80ff72;
+      color: #ff3385;
       display: flex;
       align-items: center;
       gap: 6px;
+      font-weight: 600;
     }
 
     .dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #80ff72;
+      background: #ff3385;
       animation: pulse 1.5s infinite;
     }
 
@@ -348,6 +352,32 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
+    /* ===== MEDIA CONTAINER (BARU) ===== */
+    .server-media-container {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 2px solid #ffe6f0;
+      position: relative;
+      background: #f8f9fa;
+    }
+
+    .server-media-container img,
+    .server-media-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .server-media-container:hover img,
+    .server-media-container:hover video {
+      transform: scale(1.05); /* Efek zoom saat di-hover */
+    }
+
+    /* ===== PLAYER LIST ===== */
     .player-list {
       list-style: none;
       display: flex;
@@ -361,7 +391,7 @@
       align-items: center;
       gap: 10px;
       font-size: 0.9rem;
-      color: #c9d1d9;
+      color: #555;
       padding: 6px 8px;
       border-radius: 8px;
       transition: background 0.2s;
@@ -369,30 +399,31 @@
     }
 
     .player-list li:hover {
-      background: rgba(255, 255, 255, 0.04);
+      background: #fff0f5;
     }
 
     .player-avatar {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: #2d3a4b;
+      background: #ffe6f0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.75rem;
       font-weight: 700;
-      color: #7ee8fa;
+      color: #ff3385;
       flex-shrink: 0;
     }
 
     .online-badge {
       margin-left: auto;
       font-size: 0.7rem;
-      color: #80ff72;
+      color: #ff3385;
       display: flex;
       align-items: center;
       gap: 4px;
+      font-weight: 600;
     }
 
     /* ===== LARGE JOIN BUTTON ===== */
@@ -402,8 +433,8 @@
       padding: 16px;
       border-radius: 12px;
       border: none;
-      background: linear-gradient(135deg, #7ee8fa, #80ff72);
-      color: #0b0e14;
+      background: linear-gradient(135deg, #ff66b2, #ff99cc);
+      color: white;
       font-weight: 800;
       font-size: 1.1rem;
       cursor: pointer;
@@ -411,7 +442,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px rgba(128, 255, 114, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.4);
     }
 
     .btn-join-server-large:hover {
@@ -427,7 +458,7 @@
       .container { padding: 24px 18px; }
       .header h1 { font-size: 1.8rem; }
       .profile-top { flex-direction: column; align-items: center; text-align: center; }
-      .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px; }
+      .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid #ffe6f0; padding-top: 10px; margin-top: 10px; }
     }
   </style>
 </head>
@@ -466,7 +497,7 @@
         <div class="profile-info-main">
           <div class="display-name">として</div>
           <div class="username">@real_pika0394058201840</div>
-          <span class="profile-badge">Owner Server Map Condo</span>
+          <span class="profile-badge">Premium Member</span>
           <div class="profile-bio">
             "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
           </div>
@@ -507,6 +538,17 @@
           <span class="server-name">SERVER 01</span>
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
+        
+        <!-- MEDIA SERVER 1 (Ganti src dengan link foto/gif/video kamu) -->
+        <div class="server-media-container">
+          <!-- Contoh menggunakan GIF yang bergerak -->
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKSjRrfIPjeiVyM/giphy.gif" alt="Server 1 Preview">
+          
+          <!-- ATAU jika pakai video MP4, gunakan kode ini (hapus komentar):
+          <video src="link-video-kamu.mp4" autoplay loop muted playsinline></video>
+          -->
+        </div>
+
         <ul class="player-list" id="playerList1">
           <!-- Diisi oleh JS -->
         </ul>
@@ -521,6 +563,13 @@
           <span class="server-name">SERVER 02</span>
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
+        
+        <!-- MEDIA SERVER 2 -->
+        <div class="server-media-container">
+          <!-- Ganti src dengan link foto/gif/video kamu -->
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l3q2K5jinAlChoCLS/giphy.gif" alt="Server 2 Preview">
+        </div>
+
         <ul class="player-list" id="playerList2">
           <!-- Diisi oleh JS -->
         </ul>
@@ -535,6 +584,13 @@
           <span class="server-name">SERVER 03</span>
           <span class="server-status"><span class="dot"></span> Online</span>
         </div>
+        
+        <!-- MEDIA SERVER 3 -->
+        <div class="server-media-container">
+          <!-- Ganti src dengan link foto/gif/video kamu -->
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5NXBqZnd3N3N4d3M5c2M2dWJ1bWJ5bXJtN2F3eDZ6N2N5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26tPplGWjN0xLybiU/giphy.gif" alt="Server 3 Preview">
+        </div>
+
         <ul class="player-list" id="playerList3">
           <!-- Diisi oleh JS -->
         </ul>
@@ -651,9 +707,8 @@
       renderPlayers('playerList3', server3Names);
     }, 2000);
 
-    // ===== REDIRECT TO ROBLOX (TRIK FORCE CHROME DI ANDROID) =====
+    // ===== REDIRECT TO ROBLOX (DENGAN FALLBACK ANTI-ERROR) =====
     function joinRobloxServer(serverId) {
-      // Link g5.lu yang kamu berikan
       const urls = {
         server1: 'https://g5.lu/t6vgf',
         server2: 'https://g5.lu/dd87v',
@@ -663,20 +718,14 @@
       const targetUrl = urls[serverId];
       if (!targetUrl) return;
 
-      // Deteksi apakah pengunjung menggunakan OS Android
       const isAndroid = /Android/i.test(navigator.userAgent);
 
       if (isAndroid) {
-        // TRIK ANDROID: Memaksa buka di Google Chrome
-        // Menghapus 'https://' dari url
         const cleanUrl = targetUrl.replace(/^https?:\/\//, '');
-        
-        // Format Intent untuk Chrome
-        const chromeIntentUrl = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;end`;
-        
+        const fallbackUrl = encodeURIComponent(targetUrl);
+        const chromeIntentUrl = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallbackUrl};end`;
         window.location.href = chromeIntentUrl;
       } else {
-        // Jika pengunjung pakai iPhone (iOS) atau PC
         window.open(targetUrl, '_blank');
       }
     }
