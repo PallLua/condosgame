@@ -8,455 +8,155 @@
     /* ===== PRELOADER (PINK & WHITE THEME) ===== */
     #preloader {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: #fff0f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; transition: opacity 0.6s ease;
     }
-
-    #preloader.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
+    #preloader.fade-out { opacity: 0; pointer-events: none; }
     .loader-text {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-size: 2.2rem; font-weight: 800; letter-spacing: 2px;
       background: linear-gradient(135deg, #ff66b2, #ff99cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       margin-bottom: 25px;
     }
-
     .progress-bar-container {
-      width: 80%;
-      max-width: 300px;
-      height: 10px;
-      background: #ffe6f0;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-bottom: 15px;
+      width: 80%; max-width: 300px; height: 10px; background: #ffe6f0;
+      border-radius: 5px; overflow: hidden; margin-bottom: 15px;
       box-shadow: inset 0 2px 4px rgba(255, 102, 178, 0.2);
     }
-
     .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #ff66b2, #ff99cc);
-      border-radius: 5px;
-      transition: width 0.1s linear;
+      height: 100%; width: 0%; background: linear-gradient(90deg, #ff66b2, #ff99cc);
+      border-radius: 5px; transition: width 0.1s linear;
     }
-
     .loading-log {
-      font-size: 0.85rem;
-      color: #d63384;
-      font-family: 'Courier New', Courier, monospace;
-      height: 20px;
-      text-align: center;
-      letter-spacing: 1px;
+      font-size: 0.85rem; color: #d63384; font-family: 'Courier New', Courier, monospace;
+      height: 20px; text-align: center; letter-spacing: 1px;
     }
 
     /* ===== RESET & BASICS ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
     body {
       background: linear-gradient(135deg, #fff0f5 0%, #ffe6f0 100%);
-      color: #4a4a4a;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background-attachment: fixed;
+      color: #4a4a4a; min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 20px; background-attachment: fixed;
     }
-
     .container {
-      max-width: 600px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      border-radius: 24px;
-      padding: 32px 28px;
-      box-shadow: 0 20px 40px rgba(255, 102, 178, 0.15);
-      border: 1px solid rgba(255, 182, 193, 0.5);
+      max-width: 600px; width: 100%; background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px); border-radius: 24px; padding: 32px 28px;
+      box-shadow: 0 20px 40px rgba(255, 102, 178, 0.15); border: 1px solid rgba(255, 182, 193, 0.5);
       animation: fadeIn 0.8s ease;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ===== HEADER ===== */
-    .header {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
+    .header { text-align: center; margin-bottom: 28px; }
     .header h1 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-size: 2.4rem; font-weight: 800; letter-spacing: 2px;
       background: linear-gradient(135deg, #ff66b2, #ff99cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    .header .tagline {
-      font-size: 0.85rem;
-      color: #d63384;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
-    .desc {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      padding: 0 10px;
-    }
+    .header .tagline { font-size: 0.85rem; color: #d63384; text-transform: uppercase; letter-spacing: 3px; margin-top: 4px; font-weight: 600; }
+    .desc { text-align: center; font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 30px; padding: 0 10px; }
 
     /* ===== ROBLOX PROFILE CARD ===== */
     .roblox-profile-card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 24px;
-      margin-bottom: 30px;
-      border: 1px solid #ffb6c1;
-      box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
+      background: #ffffff; border-radius: 18px; padding: 24px; margin-bottom: 30px;
+      border: 1px solid #ffb6c1; box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
     }
-
-    .profile-top {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 20px;
-    }
-
-    .avatar-container {
-      position: relative;
-      flex-shrink: 0;
-    }
-
+    .profile-top { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
+    .avatar-container { position: relative; flex-shrink: 0; }
     .roblox-avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #ffe6f0;
-      border: 3px solid #ff99cc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 0 10px rgba(255, 102, 178, 0.2);
-      overflow: hidden;
+      width: 90px; height: 90px; border-radius: 50%; background: #ffe6f0; border: 3px solid #ff99cc;
+      display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 10px rgba(255, 102, 178, 0.2); overflow: hidden;
     }
-
-    .roblox-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
+    .roblox-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .online-dot {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #ff3385;
-      border: 3px solid #ffffff;
-      box-shadow: 0 0 8px rgba(255, 51, 133, 0.6);
+      position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
+      background: #ff3385; border: 3px solid #ffffff; box-shadow: 0 0 8px rgba(255, 51, 133, 0.6);
     }
-
-    .profile-info-main {
-      flex: 1;
-    }
-
-    .profile-info-main .display-name {
-      font-size: 1.4rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: #d63384;
-    }
-
-    .profile-info-main .username {
-      font-size: 0.9rem;
-      color: #888;
-      margin-bottom: 8px;
-      word-break: break-all;
-    }
-
+    .profile-info-main { flex: 1; }
+    .profile-info-main .display-name { font-size: 1.4rem; font-weight: 800; line-height: 1.2; color: #d63384; }
+    .profile-info-main .username { font-size: 0.9rem; color: #888; margin-bottom: 8px; word-break: break-all; }
     .profile-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff66b2, #ff3385);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
+      display: inline-block; background: linear-gradient(135deg, #ff66b2, #ff3385); color: white;
+      font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
     }
-
-    .profile-bio {
-      font-size: 0.85rem;
-      color: #666;
-      line-height: 1.5;
-      margin-top: 8px;
-      border-left: 3px solid #ff99cc;
-      padding-left: 10px;
-    }
+    .profile-bio { font-size: 0.85rem; color: #666; line-height: 1.5; margin-top: 8px; border-left: 3px solid #ff99cc; padding-left: 10px; }
 
     /* Stats */
     .profile-stats-row {
-      display: flex;
-      gap: 20px;
-      padding: 15px 0;
-      border-top: 1px solid #ffe6f0;
-      border-bottom: 1px solid #ffe6f0;
-      margin-bottom: 20px;
+      display: flex; gap: 20px; padding: 15px 0; border-top: 1px solid #ffe6f0; border-bottom: 1px solid #ffe6f0; margin-bottom: 20px;
     }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-    }
-
-    .stat-item .stat-value {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #d63384;
-    }
-
-    .stat-item .stat-label {
-      font-size: 0.75rem;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 2px;
-    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .stat-item .stat-value { font-size: 1.1rem; font-weight: 800; color: #d63384; }
+    .stat-item .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
     /* ===== BUTTONS ===== */
-    .profile-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
+    .profile-actions { display: flex; gap: 10px; justify-content: center; }
     .btn-add-friend {
-      flex: 1;
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: none;
-      background: #ff66b2;
-      color: white;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      letter-spacing: 0.5px;
+      flex: 1; width: 100%; padding: 14px 20px; border-radius: 12px; border: none; background: #ff66b2;
+      color: white; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.2s ease;
+      display: flex; align-items: center; justify-content: center; text-decoration: none; letter-spacing: 0.5px;
     }
-
-    .btn-add-friend:hover {
-      background: #ff3385;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 51, 133, 0.3);
-    }
-
-    .btn-add-friend:active {
-      transform: translateY(0);
-    }
+    .btn-add-friend:hover { background: #ff3385; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 51, 133, 0.3); }
+    .btn-add-friend:active { transform: translateY(0); }
 
     /* ===== SERVERS LIST ===== */
-    .servers-section h2 {
-      font-size: 0.9rem;
-      color: #d63384;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-
+    .servers-section h2 { font-size: 0.9rem; color: #d63384; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; font-weight: 700; }
     .server-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 18px 20px;
-      border: 1px solid #ffb6c1;
-      margin-bottom: 16px;
+      background: #ffffff; border-radius: 16px; padding: 18px 20px; border: 1px solid #ffb6c1; margin-bottom: 16px;
       box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
     }
+    .server-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .server-header .server-name { font-weight: 800; font-size: 1rem; letter-spacing: 0.5px; color: #d63384; }
+    .server-header .server-status { font-size: 0.75rem; color: #ff3385; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3385; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 
-    .server-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .server-header .server-name {
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-      color: #d63384;
-    }
-
-    .server-header .server-status {
-      font-size: 0.75rem;
-      color: #ff3385;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ff3385;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* ===== MEDIA CONTAINER ===== */
+    /* ===== MEDIA CONTAINER (UPDATED) ===== */
     .server-media-container {
       width: 100%;
-      height: 180px;
-      border-radius: 12px;
-      overflow: hidden;
+      /* Dihapus height: 180px, diganti aspect-ratio agar lebih besar dan proporsional */
+      aspect-ratio: 16 / 9; 
+      border-radius: 12px; 
+      overflow: hidden; 
       margin-bottom: 16px;
-      border: 2px solid #ffe6f0;
-      position: relative;
+      border: 2px solid #ffe6f0; 
+      position: relative; 
       background: #f8f9fa;
     }
-
-    .server-media-container img,
-    .server-media-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
+    .server-media-container img, .server-media-container video { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; /* Memastikan video memenuhi kotak tanpa gepeng */
+      transition: transform 0.3s ease; 
     }
-
-    .server-media-container:hover img,
-    .server-media-container:hover video {
-      transform: scale(1.05);
-    }
+    .server-media-container:hover img, .server-media-container:hover video { transform: scale(1.05); }
 
     /* ===== PLAYER LIST ===== */
-    .player-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: opacity 0.3s ease;
-    }
-
+    .player-list { list-style: none; display: flex; flex-direction: column; gap: 8px; transition: opacity 0.3s ease; }
     .player-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: #555;
-      padding: 6px 8px;
-      border-radius: 8px;
-      transition: background 0.2s;
-      animation: fadeIn 0.4s ease;
+      display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #555;
+      padding: 6px 8px; border-radius: 8px; transition: background 0.2s; animation: fadeIn 0.4s ease;
     }
-
-    .player-list li:hover {
-      background: #fff0f5;
-    }
-
+    .player-list li:hover { background: #fff0f5; }
     .player-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #ffe6f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 1px solid #ffb6c1;
+      width: 32px; height: 32px; border-radius: 50%; background: #ffe6f0; display: flex;
+      align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; border: 1px solid #ffb6c1;
     }
-
-    .player-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .online-badge {
-      margin-left: auto;
-      font-size: 0.7rem;
-      color: #ff3385;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 600;
-    }
+    .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .online-badge { margin-left: auto; font-size: 0.7rem; color: #ff3385; display: flex; align-items: center; gap: 4px; font-weight: 600; }
 
     /* ===== LARGE JOIN BUTTON ===== */
     .btn-join-server-large {
-      width: 100%;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #ff66b2, #ff99cc);
-      color: white;
-      font-weight: 800;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; margin-top: 18px; padding: 16px; border-radius: 12px; border: none;
+      background: linear-gradient(135deg, #ff66b2, #ff99cc); color: white; font-weight: 800; font-size: 1.1rem;
+      cursor: pointer; transition: opacity 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center;
       box-shadow: 0 4px 15px rgba(255, 102, 178, 0.4);
     }
-
-    .btn-join-server-large:hover {
-      opacity: 0.9;
-    }
-
-    .btn-join-server-large:active {
-      transform: scale(0.97);
-    }
+    .btn-join-server-large:hover { opacity: 0.9; }
+    .btn-join-server-large:active { transform: scale(0.97); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 480px) {
@@ -545,8 +245,7 @@
         </div>
         
         <div class="server-media-container">
-          <!-- VIDEO SERVER 1 -->
-          <video src="https://files.catbox.moe/3xluny.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline></video>
         </div>
 
         <ul class="player-list" id="playerList1"></ul>
@@ -563,8 +262,7 @@
         </div>
         
         <div class="server-media-container">
-          <!-- VIDEO SERVER 2 -->
-          <video src="https://files.catbox.moe/bk9hyx.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline></video>
         </div>
 
         <ul class="player-list" id="playerList2"></ul>
@@ -581,8 +279,7 @@
         </div>
         
         <div class="server-media-container">
-          <!-- VIDEO SERVER 3 -->
-          <video src="https://files.catbox.moe/bk9hyx.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline></video>
         </div>
 
         <ul class="player-list" id="playerList3"></ul>
@@ -666,10 +363,10 @@
 
     // ===== KUMPULAN FOTO PROFIL ROBLOX NOOB (BACON HAIR) =====
     const robloxAvatars = [
-      'https://i.imgur.com/bwppot2.jpeg', 
-      'https://i.imgur.com/dP4k8V4.jpeg', 
-      'https://i.imgur.com/cZQpbYt.jpeg', 
-      'https://i.imgur.com/80lbpqX.jpeg'  
+      'https://i.imgur.com/5mP0w6m.png', 
+      'https://i.imgur.com/9sK4c2o.png', 
+      'https://i.imgur.com/8QO5H8n.png', 
+      'https://i.imgur.com/kXW2Y9m.png'  
     ];
 
     // ===== FUNGSI RENDER PEMAIN =====
@@ -710,7 +407,7 @@
       renderPlayers('playerList3', server3Names);
     }, 2000);
 
-    // ===== REDIRECT TO ROBLOX (DENGAN FALLBACK ANTI-ERROR) =====
+    // ===== REDIRECT TO ROBLOX =====
     function joinRobloxServer(serverId) {
       const urls = {
         server1: 'https://g5.lu/t6vgf',
@@ -735,4 +432,4 @@
   </script>
 
 </body>
-  </html>
+</html>
