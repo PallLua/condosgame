@@ -114,22 +114,25 @@
     .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3385; animation: pulse 1.5s infinite; }
     @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 
-    /* ===== MEDIA CONTAINER (UPDATED) ===== */
+    /* ===== MEDIA CONTAINER (FIXED FOR ALL BROWSERS) ===== */
     .server-media-container {
       width: 100%;
-      /* Dihapus height: 180px, diganti aspect-ratio agar lebih besar dan proporsional */
-      aspect-ratio: 16 / 9; 
+      position: relative;
+      padding-bottom: 56.25%; /* Trik 16:9 Aspect Ratio agar tidak blank di HP */
+      height: 0;
       border-radius: 12px; 
       overflow: hidden; 
       margin-bottom: 16px;
       border: 2px solid #ffe6f0; 
-      position: relative; 
-      background: #f8f9fa;
+      background: #f1f3f5; 
     }
     .server-media-container img, .server-media-container video { 
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%; 
       height: 100%; 
-      object-fit: cover; /* Memastikan video memenuhi kotak tanpa gepeng */
+      object-fit: cover; 
       transition: transform 0.3s ease; 
     }
     .server-media-container:hover img, .server-media-container:hover video { transform: scale(1.05); }
@@ -245,7 +248,7 @@
         </div>
         
         <div class="server-media-container">
-          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline preload="auto"></video>
         </div>
 
         <ul class="player-list" id="playerList1"></ul>
@@ -262,7 +265,7 @@
         </div>
         
         <div class="server-media-container">
-          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline preload="auto"></video>
         </div>
 
         <ul class="player-list" id="playerList2"></ul>
@@ -279,7 +282,7 @@
         </div>
         
         <div class="server-media-container">
-          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline></video>
+          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline preload="auto"></video>
         </div>
 
         <ul class="player-list" id="playerList3"></ul>
