@@ -2,415 +2,606 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CONDOGAME — Server Game</title>
   <style>
-    /* ===== PRELOADER (PINK & WHITE THEME) ===== */
-    #preloader {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #fff0f5;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 9999; transition: opacity 0.6s ease;
-    }
-    #preloader.fade-out { opacity: 0; pointer-events: none; }
-    .loader-text {
-      font-size: 2.2rem; font-weight: 800; letter-spacing: 2px;
-      background: linear-gradient(135deg, #ff66b2, #ff99cc);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 25px;
-    }
-    .progress-bar-container {
-      width: 80%; max-width: 300px; height: 10px; background: #ffe6f0;
-      border-radius: 5px; overflow: hidden; margin-bottom: 15px;
-      box-shadow: inset 0 2px 4px rgba(255, 102, 178, 0.2);
-    }
-    .progress-bar-fill {
-      height: 100%; width: 0%; background: linear-gradient(90deg, #ff66b2, #ff99cc);
-      border-radius: 5px; transition: width 0.1s linear;
-    }
-    .loading-log {
-      font-size: 0.85rem; color: #d63384; font-family: 'Courier New', Courier, monospace;
-      height: 20px; text-align: center; letter-spacing: 1px;
-    }
-
     /* ===== RESET & BASICS ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    :root {
+      --bg-dark: #0d0814;
+      --bg-card: #1c1329;
+      --text-main: #ffffff;
+      --text-muted: #9a8eaa;
+      --accent-gradient: linear-gradient(90deg, #9333ea, #ec4899);
+      --border-color: #2d1f40;
+    }
+
     body {
-      background: linear-gradient(135deg, #fff0f5 0%, #ffe6f0 100%);
-      color: #4a4a4a; min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 20px; background-attachment: fixed;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 80px; /* Ruang untuk Bottom Nav */
     }
-    .container {
-      max-width: 600px; width: 100%; background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px); border-radius: 24px; padding: 32px 28px;
-      box-shadow: 0 20px 40px rgba(255, 102, 178, 0.15); border: 1px solid rgba(255, 182, 193, 0.5);
-      animation: fadeIn 0.8s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* ===== HEADER ===== */
-    .header { text-align: center; margin-bottom: 28px; }
-    .header h1 {
-      font-size: 2.4rem; font-weight: 800; letter-spacing: 2px;
-      background: linear-gradient(135deg, #ff66b2, #ff99cc);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .header .tagline { font-size: 0.85rem; color: #d63384; text-transform: uppercase; letter-spacing: 3px; margin-top: 4px; font-weight: 600; }
-    .desc { text-align: center; font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 30px; padding: 0 10px; }
-
-    /* ===== ROBLOX PROFILE CARD ===== */
-    .roblox-profile-card {
-      background: #ffffff; border-radius: 18px; padding: 24px; margin-bottom: 30px;
-      border: 1px solid #ffb6c1; box-shadow: 0 8px 24px rgba(255, 182, 193, 0.3);
-    }
-    .profile-top { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px; }
-    .avatar-container { position: relative; flex-shrink: 0; }
-    .roblox-avatar {
-      width: 90px; height: 90px; border-radius: 50%; background: #ffe6f0; border: 3px solid #ff99cc;
-      display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 10px rgba(255, 102, 178, 0.2); overflow: hidden;
-    }
-    .roblox-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .online-dot {
-      position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
-      background: #ff3385; border: 3px solid #ffffff; box-shadow: 0 0 8px rgba(255, 51, 133, 0.6);
-    }
-    .profile-info-main { flex: 1; }
-    .profile-info-main .display-name { font-size: 1.4rem; font-weight: 800; line-height: 1.2; color: #d63384; }
-    .profile-info-main .username { font-size: 0.9rem; color: #888; margin-bottom: 8px; word-break: break-all; }
-    .profile-badge {
-      display: inline-block; background: linear-gradient(135deg, #ff66b2, #ff3385); color: white;
-      font-size: 0.7rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
-    }
-    .profile-bio { font-size: 0.85rem; color: #666; line-height: 1.5; margin-top: 8px; border-left: 3px solid #ff99cc; padding-left: 10px; }
-
-    /* Stats */
-    .profile-stats-row {
-      display: flex; gap: 20px; padding: 15px 0; border-top: 1px solid #ffe6f0; border-bottom: 1px solid #ffe6f0; margin-bottom: 20px;
-    }
-    .stat-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
-    .stat-item .stat-value { font-size: 1.1rem; font-weight: 800; color: #d63384; }
-    .stat-item .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
-
-    /* ===== BUTTONS ===== */
-    .profile-actions { display: flex; gap: 10px; justify-content: center; }
-    .btn-add-friend {
-      flex: 1; width: 100%; padding: 14px 20px; border-radius: 12px; border: none; background: #ff66b2;
-      color: white; font-weight: 800; font-size: 1rem; cursor: pointer; transition: all 0.2s ease;
-      display: flex; align-items: center; justify-content: center; text-decoration: none; letter-spacing: 0.5px;
-    }
-    .btn-add-friend:hover { background: #ff3385; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 51, 133, 0.3); }
-    .btn-add-friend:active { transform: translateY(0); }
-
-    /* ===== SERVERS LIST ===== */
-    .servers-section h2 { font-size: 0.9rem; color: #d63384; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; font-weight: 700; }
-    .server-card {
-      background: #ffffff; border-radius: 16px; padding: 18px 20px; border: 1px solid #ffb6c1; margin-bottom: 16px;
-      box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
-    }
-    .server-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .server-header .server-name { font-weight: 800; font-size: 1rem; letter-spacing: 0.5px; color: #d63384; }
-    .server-header .server-status { font-size: 0.75rem; color: #ff3385; display: flex; align-items: center; gap: 6px; font-weight: 600; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff3385; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
-
-    /* ===== MEDIA CONTAINER (FIXED FOR ALL BROWSERS) ===== */
-    .server-media-container {
+    .app-container {
+      max-width: 600px;
       width: 100%;
-      position: relative;
-      padding-bottom: 56.25%; /* Trik 16:9 Aspect Ratio agar tidak blank di HP */
-      height: 0;
-      border-radius: 12px; 
-      overflow: hidden; 
-      margin-bottom: 16px;
-      border: 2px solid #ffe6f0; 
-      background: #f1f3f5; 
+      padding: 20px;
     }
-    .server-media-container img, .server-media-container video { 
-      position: absolute;
+
+    /* ===== TOP HEADER ===== */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: var(--bg-dark);
+      position: sticky;
       top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .logo-area h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .btn-verify {
+      background: var(--accent-gradient);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
+    }
+
+    /* ===== TABS CONTENT ===== */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== GAMES TAB ===== */
+    .search-bar {
+      background-color: var(--bg-card);
+      border-radius: 20px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .filter-chips {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-bottom: 25px;
+      padding-bottom: 5px;
+      scrollbar-width: none; /* Firefox */
+    }
+    .filter-chips::-webkit-scrollbar { display: none; } /* Chrome */
+    
+    .chip {
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+    .chip.active {
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    /* GAME CARD */
+    .game-card {
+      background-color: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .media-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      background: #000;
+    }
+
+    .media-wrapper video, .media-wrapper img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .tag {
+      position: absolute;
+      top: 15px; left: 15px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 15px; right: 15px;
+      background: var(--accent-gradient);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .game-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .game-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    /* ===== LOOPING AVATARS ===== */
+    .avatar-marquee {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+      /* Efek bayangan di ujung kiri kanan */
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .avatar-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: scrollLeft 15s linear infinite;
+    }
+    
+    /* Berhenti bergerak saat di-hover (khusus PC) */
+    .avatar-marquee:hover .avatar-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); } /* Berjalan setengah panjang track */
+    }
+
+    .active-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid #9333ea;
+      background-color: #333;
+      object-fit: cover;
+    }
+
+    .btn-play {
+      width: 100%;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: opacity 0.2s;
+      box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+    }
+    .btn-play:active { transform: scale(0.98); }
+
+    /* ===== FAQ TAB ===== */
+    .faq-card {
+      background-color: var(--bg-card);
+      border-radius: 20px;
+      padding: 30px 20px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .faq-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #333;
+      margin: 0 auto 15px auto;
+      border: 3px solid #ec4899;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .faq-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .faq-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .faq-username {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+    }
+
+    .faq-bio {
+      font-size: 0.95rem;
+      color: #ccc;
+      font-style: italic;
+      margin-bottom: 25px;
+      padding: 0 10px;
+    }
+
+    .faq-stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-box .val {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ec4899;
+    }
+
+    .stat-box .lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-add-friend {
+      display: block;
+      width: 100%;
+      background: #3b82f6; /* Biru khas Roblox */
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    .btn-add-friend:hover {
+      background: #2563eb;
+    }
+
+    /* ===== BOTTOM NAVIGATION ===== */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
       left: 0;
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      transition: transform 0.3s ease; 
+      width: 100%;
+      background-color: #130c1c;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--border-color);
+      z-index: 1000;
     }
-    .server-media-container:hover img, .server-media-container:hover video { transform: scale(1.05); }
 
-    /* ===== PLAYER LIST ===== */
-    .player-list { list-style: none; display: flex; flex-direction: column; gap: 8px; transition: opacity 0.3s ease; }
-    .player-list li {
-      display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #555;
-      padding: 6px 8px; border-radius: 8px; transition: background 0.2s; animation: fadeIn 0.4s ease;
+    .nav-container {
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
     }
-    .player-list li:hover { background: #fff0f5; }
-    .player-avatar {
-      width: 32px; height: 32px; border-radius: 50%; background: #ffe6f0; display: flex;
-      align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; border: 1px solid #ffb6c1;
-    }
-    .player-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .online-badge { margin-left: auto; font-size: 0.7rem; color: #ff3385; display: flex; align-items: center; gap: 4px; font-weight: 600; }
 
-    /* ===== LARGE JOIN BUTTON ===== */
-    .btn-join-server-large {
-      width: 100%; margin-top: 18px; padding: 16px; border-radius: 12px; border: none;
-      background: linear-gradient(135deg, #ff66b2, #ff99cc); color: white; font-weight: 800; font-size: 1.1rem;
-      cursor: pointer; transition: opacity 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.4);
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px 30px;
+      border-radius: 15px;
+      transition: all 0.3s;
     }
-    .btn-join-server-large:hover { opacity: 0.9; }
-    .btn-join-server-large:active { transform: scale(0.97); }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 480px) {
-      .container { padding: 24px 18px; }
-      .header h1 { font-size: 1.8rem; }
-      .profile-top { flex-direction: column; align-items: center; text-align: center; }
-      .profile-bio { border-left: none; padding-left: 0; border-top: 1px solid #ffe6f0; padding-top: 10px; margin-top: 10px; }
+    .nav-item.active {
+      color: white;
+      background: var(--accent-gradient);
     }
+
+    .nav-icon {
+      font-size: 1.2rem;
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- PRELOADER -->
-  <div id="preloader">
-    <div class="loader-text">CONDOGAME</div>
-    <div class="progress-bar-container">
-      <div class="progress-bar-fill" id="progressBar"></div>
-    </div>
-    <div class="loading-log" id="loadingLog">Initializing website...</div>
-  </div>
-
-  <div class="container">
-    <!-- HEADER -->
-    <div class="header">
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="logo-area">
+      <div class="logo-icon">C</div>
       <h1>CONDOGAME</h1>
-      <div class="tagline">Online Condo Game • Fun Server</div>
     </div>
+    <a href="#" class="btn-verify">🛡️ Verify</a>
+  </header>
 
-    <!-- DESCRIPTION -->
-    <p class="desc">
-      Your gateway to join servers, see online players, and hop into the game with a clean and modern interface.
-    </p>
+  <div class="app-container">
+    
+    <!-- ================= TAB GAMES ================= -->
+    <div id="tab-games" class="tab-content active">
+      
+      <!-- Search & Filter -->
+      <div class="search-bar">
+        🔍 Search games...
+      </div>
 
-    <!-- ROBLOX PROFILE CARD -->
-    <div class="roblox-profile-card">
-      <div class="profile-top">
-        <div class="avatar-container">
-          <div class="roblox-avatar">
-            <img src="Avatar.png" alt="Profile Avatar">
-          </div>
-          <div class="online-dot" title="Online"></div>
+      <div class="filter-chips">
+        <div class="chip active">All</div>
+        <div class="chip">Roleplay</div>
+        <div class="chip">Romance</div>
+        <div class="chip">Action</div>
+      </div>
+
+      <div class="section-title">3 games available</div>
+
+      <!-- GAME 1 -->
+      <div class="game-card">
+        <div class="media-wrapper">
+          <span class="tag">Romance</span>
+          <span class="featured-tag">⭐ Featured</span>
+          <!-- Video Server 1 -->
+          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline></video>
         </div>
-        <div class="profile-info-main">
-          <div class="display-name">として</div>
-          <div class="username">@real_pika0394058201840</div>
-          <span class="profile-badge">Owner Server Map Condo</span>
-          <div class="profile-bio">
-            "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
+        <div class="card-body">
+          <div class="game-title">New Server Condo 1</div>
+          <div class="game-desc">In this game, you'll learn about pleasure ❤️</div>
+          
+          <!-- LOOPING AVATARS -->
+          <div class="avatar-marquee">
+            <div class="avatar-track" id="track1">
+              <!-- Diisi oleh JavaScript -->
+            </div>
           </div>
+
+          <button class="btn-play" onclick="joinRobloxServer('server1')">
+            Play now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </button>
         </div>
       </div>
 
-      <!-- Stats -->
-      <div class="profile-stats-row">
-        <div class="stat-item">
-          <span class="stat-value">18</span>
-          <span class="stat-label">Connections</span>
+      <!-- GAME 2 -->
+      <div class="game-card">
+        <div class="media-wrapper">
+          <span class="tag">Roleplay</span>
+          <span class="featured-tag">⭐ Featured</span>
+          <!-- Video Server 2 -->
+          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline></video>
         </div>
-        <div class="stat-item">
-          <span class="stat-value">1.1K</span>
-          <span class="stat-label">Followers</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">6</span>
-          <span class="stat-label">Following</span>
+        <div class="card-body">
+          <div class="game-title">Chat with AI Emiko</div>
+          <div class="game-desc">Talk, interact, and hang out with the cutest AI.</div>
+          
+          <div class="avatar-marquee">
+            <div class="avatar-track" id="track2"></div>
+          </div>
+
+          <button class="btn-play" onclick="joinRobloxServer('server2')">
+            Play now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </button>
         </div>
       </div>
 
-      <!-- Action Button -->
-      <div class="profile-actions">
+      <!-- GAME 3 -->
+      <div class="game-card">
+        <div class="media-wrapper">
+          <span class="tag">Action</span>
+          <span class="featured-tag">⭐ Featured</span>
+          <!-- Video Server 3 -->
+          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="card-body">
+          <div class="game-title">Repacked Baddies</div>
+          <div class="game-desc">The ultimate hangout spot with the baddest crew.</div>
+          
+          <div class="avatar-marquee">
+            <div class="avatar-track" id="track3"></div>
+          </div>
+
+          <button class="btn-play" onclick="joinRobloxServer('server3')">
+            Play now <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </button>
+        </div>
+      </div>
+
+    </div> <!-- End Tab Games -->
+
+
+    <!-- ================= TAB FAQ ================= -->
+    <div id="tab-faq" class="tab-content">
+      <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px; color: white;">My Profile</h2>
+      
+      <div class="faq-card">
+        <div class="faq-avatar">
+          <img src="Avatar.png" alt="Profile">
+        </div>
+        <div class="faq-name">として</div>
+        <div class="faq-username">@real_pika0394058201840</div>
+        
+        <div class="faq-bio">
+          "Just a chill gamer looking for good vibes and fun servers. Let's hang out!"
+        </div>
+
+        <div class="faq-stats">
+          <div class="stat-box">
+            <span class="val">18</span>
+            <span class="lbl">Connections</span>
+          </div>
+          <div class="stat-box">
+            <span class="val">1.1K</span>
+            <span class="lbl">Followers</span>
+          </div>
+          <div class="stat-box">
+            <span class="val">6</span>
+            <span class="lbl">Following</span>
+          </div>
+        </div>
+
         <a href="https://www.roblox.rw/users/493909118271/profile" target="_blank" class="btn-add-friend">
           Add Friend
         </a>
       </div>
-    </div>
+    </div> <!-- End Tab FAQ -->
 
-    <!-- SERVERS LIST -->
-    <div class="servers-section">
-      <h2>Servers</h2>
-
-      <!-- SERVER 01 -->
-      <div class="server-card">
-        <div class="server-header">
-          <span class="server-name">SERVER 01</span>
-          <span class="server-status"><span class="dot"></span> Online</span>
-        </div>
-        
-        <div class="server-media-container">
-          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline preload="auto"></video>
-        </div>
-
-        <ul class="player-list" id="playerList1"></ul>
-        <button class="btn-join-server-large" onclick="joinRobloxServer('server1')">
-          Join Server 01
-        </button>
-      </div>
-
-      <!-- SERVER 02 -->
-      <div class="server-card">
-        <div class="server-header">
-          <span class="server-name">SERVER 02</span>
-          <span class="server-status"><span class="dot"></span> Online</span>
-        </div>
-        
-        <div class="server-media-container">
-          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline preload="auto"></video>
-        </div>
-
-        <ul class="player-list" id="playerList2"></ul>
-        <button class="btn-join-server-large" onclick="joinRobloxServer('server2')">
-          Join Server 02
-        </button>
-      </div>
-
-      <!-- SERVER 03 -->
-      <div class="server-card">
-        <div class="server-header">
-          <span class="server-name">SERVER 03</span>
-          <span class="server-status"><span class="dot"></span> Online</span>
-        </div>
-        
-        <div class="server-media-container">
-          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline preload="auto"></video>
-        </div>
-
-        <ul class="player-list" id="playerList3"></ul>
-        <button class="btn-join-server-large" onclick="joinRobloxServer('server3')">
-          Join Server 03
-        </button>
-      </div>
-    </div>
   </div>
 
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+    <div class="nav-container">
+      <div class="nav-item active" onclick="switchTab('games', this)">
+        <span class="nav-icon">🎮</span>
+        <span>Games</span>
+      </div>
+      <div class="nav-item" onclick="switchTab('faq', this)">
+        <span class="nav-icon">👤</span>
+        <span>FAQ</span>
+      </div>
+    </div>
+  </nav>
+
   <script>
-    // ===== PRELOADER LOGIC =====
-    window.addEventListener('load', () => {
-      const preloader = document.getElementById('preloader');
-      const progressBar = document.getElementById('progressBar');
-      const logText = document.getElementById('loadingLog');
-      
-      const duration = 8000; 
-      const intervalTime = 50; 
-      const step = (100 / (duration / intervalTime)); 
-      
-      let progress = 0;
-
-      const messages = [
-        { threshold: 0, text: "Initializing website..." },
-        { threshold: 20, text: "Loading assets and resources..." },
-        { threshold: 40, text: "Connecting to game servers..." },
-        { threshold: 60, text: "Fetching player data..." },
-        { threshold: 80, text: "Preparing interface..." },
-        { threshold: 95, text: "Almost ready..." }
-      ];
-
-      const progressInterval = setInterval(() => {
-        progress += step;
-        
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(progressInterval);
-          
-          logText.textContent = "Ready! Redirecting...";
-          
-          setTimeout(() => {
-            preloader.classList.add('fade-out');
-            setTimeout(() => {
-              preloader.remove();
-            }, 600); 
-          }, 500); 
-        }
-
-        progressBar.style.width = `${progress}%`;
-
-        for (let i = messages.length - 1; i >= 0; i--) {
-          if (progress >= messages[i].threshold) {
-            if (logText.textContent !== messages[i].text) {
-              logText.textContent = messages[i].text;
-            }
-            break;
-          }
-        }
-      }, intervalTime);
-    });
-
-    // ===== KUMPULAN NAMA KHUSUS PER SERVER =====
-    const server1Names = [
-      'Joe', 'Hudson', 'Wayne', 'Alex', 'Budi', 'Sarah', 'Michael', 
-      'David', 'Chris', 'Ryan', 'Leo', 'Maya', 'Zeno', 'Mika', 
-      'Farel', 'Dinda', 'Rizky', 'Kevin', 'Justin', 'Brian'
-    ];
-
-    const server2Names = [
-      'Emiko', 'Sakura', 'Yuki', 'Hana', 'Kaito', 'Akira', 'Mei',
-      'Sora', 'Haru', 'Neko', 'Miku', 'Luna', 'Kira', 'Rei',
-      'Zero', 'Ichigo', 'Rin', 'Asuka', 'Kenji', 'Yumi'
-    ];
-
-    const server3Names = [
-      'Shadow', 'Viper', 'Raven', 'Blaze', 'Ghost', 'Fury', 'Striker',
-      'Rogue', 'Nova', 'Titan', 'Jinx', 'Sly', 'Karma', 'Zara',
-      'Axel', 'Reaper', 'Crimson', 'Hunter', 'Onyx', 'Zane'
-    ];
-
-    // ===== KUMPULAN FOTO PROFIL ROBLOX NOOB (BACON HAIR) =====
-    const robloxAvatars = [
-      'https://i.imgur.com/bwppot2.jpeg', 
-      'https://i.imgur.com/dP4k8V4.jpeg', 
-      'https://i.imgur.com/cZQpbYt.jpeg', 
-      'https://i.imgur.com/zJZDvyN.jpeg'  
-    ];
-
-    // ===== FUNGSI RENDER PEMAIN =====
-    function renderPlayers(listId, namesArray) {
-      const playerList = document.getElementById(listId);
-      if (!playerList) return;
-
-      const shuffledNames = [...namesArray].sort(() => 0.5 - Math.random());
-      const playerCount = Math.floor(Math.random() * 4) + 3; 
-      const selectedPlayers = shuffledNames.slice(0, playerCount);
-
-      playerList.innerHTML = '';
-
-      selectedPlayers.forEach(playerName => {
-        const randomAvatarUrl = robloxAvatars[Math.floor(Math.random() * robloxAvatars.length)];
-        
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <span class="player-avatar">
-            <img src="${randomAvatarUrl}" alt="${playerName}">
-          </span>
-          <span>${playerName} joined the game</span>
-          <span class="online-badge"><span class="dot"></span> online</span>
-        `;
-        playerList.appendChild(li);
+    // ===== TAB SWITCHING LOGIC =====
+    function switchTab(tabId, element) {
+      // 1. Sembunyikan semua tab content
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
       });
+      
+      // 2. Hapus class active dari semua nav item
+      document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+      });
+
+      // 3. Tampilkan tab yang dipilih
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      
+      // 4. Tambahkan class active ke tombol yang diklik
+      element.classList.add('active');
     }
 
-    // Inisialisasi awal
-    renderPlayers('playerList1', server1Names);
-    renderPlayers('playerList2', server2Names);
-    renderPlayers('playerList3', server3Names);
+    // ===== LOOPING AVATAR GENERATOR =====
+    // Kita menggunakan gambar avatar bacon hair
+    const robloxAvatars = [
+      'https://i.imgur.com/5mP0w6m.png', 
+      'https://i.imgur.com/9sK4c2o.png', 
+      'https://i.imgur.com/8QO5H8n.png', 
+      'https://i.imgur.com/kXW2Y9m.png'  
+    ];
 
-    // Looping tiap 2 detik
-    setInterval(() => {
-      renderPlayers('playerList1', server1Names);
-      renderPlayers('playerList2', server2Names);
-      renderPlayers('playerList3', server3Names);
-    }, 2000);
+    function generateAvatars(trackId) {
+      const track = document.getElementById(trackId);
+      
+      // Karena kita menggunakan CSS animation `translateX(-50%)` untuk looping,
+      // kita harus mengisi list avatar dua kali lipat agar putarannya tidak terlihat putus.
+      
+      let avatarHtml = '';
+      
+      // Looping 1: Buat 10 avatar acak
+      for(let i=0; i<10; i++) {
+        const randomImg = robloxAvatars[Math.floor(Math.random() * robloxAvatars.length)];
+        avatarHtml += `<img src="${randomImg}" class="active-avatar" alt="Player">`;
+      }
+      
+      // Looping 2: Gandakan persis 10 avatar di atasnya (harus sama persis untuk efek mulus)
+      track.innerHTML = avatarHtml + avatarHtml;
+    }
 
-    // ===== REDIRECT TO ROBLOX =====
+    // Panggil fungsi untuk mengisi ketiga server
+    generateAvatars('track1');
+    generateAvatars('track2');
+    generateAvatars('track3');
+
+    // ===== REDIRECT TO ROBLOX (DENGAN FALLBACK ANTI-ERROR) =====
     function joinRobloxServer(serverId) {
       const urls = {
         server1: 'https://g5.lu/t6vgf',
