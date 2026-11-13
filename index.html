@@ -228,7 +228,7 @@
       color: #d63384;
     }
 
-    /* ===== NEW ROW FOR DESC & AVATARS ===== */
+    /* ===== ROW FOR DESC & AVATARS ===== */
     .card-content-row {
       display: flex;
       justify-content: space-between;
@@ -244,7 +244,7 @@
       line-height: 1.4;
     }
 
-    /* ===== STATIC OVERLAPPING AVATARS (RIGHT SIDE) ===== */
+    /* ===== STATIC OVERLAPPING AVATARS ===== */
     .active-players {
       display: flex;
       align-items: center;
@@ -483,7 +483,7 @@
 
       <div class="section-title" id="gameCount">3 games available</div>
 
-      <!-- Container untuk Game Cards yang akan di-render oleh JS -->
+      <!-- Container untuk Game Cards -->
       <div id="gamesContainer"></div>
 
     </div> <!-- End Tab Games -->
@@ -630,12 +630,12 @@
       }
     ];
 
-    // Avatar generator
+    // ===== AVATAR GENERATOR (LINK SUDAH DIPERBAIKI) =====
     const robloxAvatars = [
-      'https://postimg.cc/v4jLWXZC', 
-      'https://postimg.cc/4KkHf0dY', 
-      'https://postimg.cc/5YpXmNSD', 
-      'https://postimg.cc/sGXvHdnw'  
+      'https://i.postimg.cc/bvYCfBcY/cute.webp',       // Link direct dari postimg
+      'https://i.postimg.cc/rpz1JX2N/rr.webp',         // Link direct dari postimg
+      'https://i.postimg.cc/QCZchF9N/bacon.webp',      // Link direct dari postimg
+      'https://i.postimg.cc/vT7fBG5F/no-Filter.webp'   // Link direct dari postimg
     ];
 
     // Menghasilkan HTML untuk avatar (3-4 orang)
@@ -726,7 +726,6 @@
 
     // ===== AVATAR LOOPING (BERGANTI SETIAP 4 DETIK) =====
     setInterval(() => {
-      // Cari semua kontainer avatar di layar dan perbarui isinya
       const avatarContainers = document.querySelectorAll('.active-players');
       avatarContainers.forEach(container => {
         container.innerHTML = generateAvatarHTML();
