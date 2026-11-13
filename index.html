@@ -23,8 +23,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 70px; /* Jarak untuk header yang fixed */
-      padding-bottom: 90px; /* Jarak untuk bottom nav */
+      padding-top: 70px;
+      padding-bottom: 90px;
     }
 
     .app-container {
@@ -38,9 +38,9 @@
       position: fixed;
       top: 0; left: 0; width: 100%;
       display: flex;
-      justify-content: center; /* Agar isi header ketengah */
-      background: rgba(255, 240, 245, 0.85); /* Transparan */
-      backdrop-filter: blur(12px); /* Efek kaca/blur */
+      justify-content: center;
+      background: rgba(255, 240, 245, 0.85);
+      backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 1000;
     }
@@ -74,7 +74,7 @@
     }
 
     .logo-area h1 {
-      font-size: 1rem; /* Ukuran disamakan dengan logo C */
+      font-size: 1rem;
       font-weight: 800;
       color: #d63384;
       letter-spacing: 0.5px;
@@ -182,7 +182,7 @@
     .media-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
       background: #000;
     }
 
@@ -205,7 +205,6 @@
       text-transform: capitalize;
     }
 
-    /* Badge Featured Custom SVG */
     .featured-badge {
       position: absolute;
       top: 15px; right: 15px;
@@ -229,39 +228,72 @@
       color: #d63384;
     }
 
-    .game-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 15px;
+    /* ===== NEW ROW FOR DESC & AVATARS ===== */
+    .card-content-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      gap: 15px;
     }
 
-    /* ===== STATIC OVERLAPPING AVATARS ===== */
+    .game-desc {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ===== STATIC OVERLAPPING AVATARS (RIGHT SIDE) ===== */
     .active-players {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
-      padding-left: 10px;
+      flex-shrink: 0;
     }
 
-    .active-avatar {
-      width: 36px;
-      height: 36px;
+    .avatar-wrapper {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      margin-left: -12px;
       border-radius: 50%;
       border: 2px solid #ff99cc;
       background-color: #f8f9fa;
-      object-fit: cover;
-      margin-left: -12px; 
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       transition: transform 0.2s;
+      animation: popIn 0.3s ease;
     }
     
-    .active-avatar:first-child {
-      margin-left: 0;
-    }
+    .avatar-wrapper:first-child { margin-left: 0; }
 
-    .active-avatar:hover {
+    .avatar-wrapper:hover {
       transform: translateY(-5px);
       z-index: 10;
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* YELLOW STATUS DOT */
+    .status-dot {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 12px;
+      height: 12px;
+      background-color: #facc15; /* Kuning Terang */
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(250, 204, 21, 0.6);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     /* Tombol Play */
@@ -303,35 +335,13 @@
       margin: 0 auto 15px auto;
       border: 3px solid #ff99cc;
       overflow: hidden;
-      position: relative;
     }
 
-    .faq-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .faq-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    .faq-name {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 5px;
-      color: #d63384;
-    }
-
-    .faq-username {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
-
-    .faq-bio {
-      font-size: 0.95rem;
-      color: #666;
-      font-style: italic;
-      margin-bottom: 25px;
-      padding: 0 10px;
-    }
+    .faq-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 5px; color: #d63384; }
+    .faq-username { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; }
+    .faq-bio { font-size: 0.95rem; color: #666; font-style: italic; margin-bottom: 25px; padding: 0 10px; }
 
     .faq-stats {
       display: flex;
@@ -343,23 +353,9 @@
       border-bottom: 1px solid #ffe6f0;
     }
 
-    .stat-box {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .stat-box .val {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ff3385;
-    }
-
-    .stat-box .lbl {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+    .stat-box { display: flex; flex-direction: column; }
+    .stat-box .val { font-size: 1.2rem; font-weight: 800; color: #ff3385; }
+    .stat-box .lbl { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
     .btn-add-friend {
       display: flex;
@@ -382,9 +378,7 @@
     /* ===== BOTTOM NAVIGATION ===== */
     .bottom-nav {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
+      bottom: 0; left: 0; width: 100%;
       background-color: #ffffff;
       display: flex;
       justify-content: center;
@@ -394,25 +388,17 @@
     }
 
     .nav-container {
-      max-width: 600px;
-      width: 100%;
+      max-width: 600px; width: 100%;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
     }
 
     .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 600;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px 40px;
-      border-radius: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.8rem; font-weight: 600; gap: 5px;
+      cursor: pointer; padding: 8px 40px; border-radius: 20px;
       transition: all 0.3s;
     }
 
@@ -422,11 +408,7 @@
       box-shadow: 0 4px 10px rgba(255, 102, 178, 0.3);
     }
 
-    .nav-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
+    .nav-icon { width: 20px; height: 20px; fill: currentColor; }
 
     /* ===== PRELOADER ===== */
     #preloader {
@@ -626,23 +608,23 @@
         id: 'server1',
         title: 'New Server Condo 1',
         genre: 'Romance',
-        desc: "In this game, you'll learn about pleasure ❤️",
+        desc: "Step into the ultimate romance experience. Find your match and vibe with others! ❤️",
         video: 'https://i.imgur.com/mDMLR61.mp4',
         link: 'https://g5.lu/t6vgf'
       },
       {
         id: 'server2',
-        title: 'Chat with AI Emiko',
+        title: 'New Server Condo 2',
         genre: 'Roleplay',
-        desc: "Talk, interact, and hang out with the cutest AI.",
+        desc: "Meet Emiko, your perfect AI companion. Chat, play, and explore a whole new world together! ✨",
         video: 'https://i.imgur.com/a40LH9A.mp4',
         link: 'https://g5.lu/dd87v'
       },
       {
         id: 'server3',
-        title: 'Repacked Baddies',
+        title: 'New Server Condo 3',
         genre: 'Action',
-        desc: "The ultimate hangout spot with the baddest crew.",
+        desc: "Join the baddest crew in town. Epic hangouts, wild vibes, and non-stop action awaits! 🔥",
         video: 'https://i.imgur.com/GjgpaRz.mp4',
         link: 'https://g5.lu/heebg'
       }
@@ -656,12 +638,18 @@
       'https://i.imgur.com/kXW2Y9m.png'  
     ];
 
+    // Menghasilkan HTML untuk avatar (3-4 orang)
     function generateAvatarHTML() {
       let html = '';
-      const count = Math.floor(Math.random() * 3) + 5; // 5-7 avatars
+      const count = Math.floor(Math.random() * 2) + 3; // 3 atau 4 avatar
       for(let i=0; i<count; i++) {
         const randomImg = robloxAvatars[Math.floor(Math.random() * robloxAvatars.length)];
-        html += `<img src="${randomImg}" class="active-avatar" alt="Player">`;
+        html += `
+          <div class="avatar-wrapper">
+            <img src="${randomImg}" class="avatar-img" alt="Player">
+            <span class="status-dot"></span>
+          </div>
+        `;
       }
       return html;
     }
@@ -694,10 +682,13 @@
           </div>
           <div class="card-body">
             <div class="game-title">${game.title}</div>
-            <div class="game-desc">${game.desc}</div>
             
-            <div class="active-players">
-              ${generateAvatarHTML()}
+            <!-- Baris Konten: Deskripsi di Kiri, Avatar di Kanan -->
+            <div class="card-content-row">
+              <div class="game-desc">${game.desc}</div>
+              <div class="active-players">
+                ${generateAvatarHTML()}
+              </div>
             </div>
 
             <button class="btn-play" onclick="joinRobloxServer('${game.link}')">
@@ -724,19 +715,23 @@
     }
 
     function filterGenre(genre, element) {
-      // Update UI tombol
       document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
       element.classList.add('active');
-
-      // Update State
       currentGenre = genre;
-      
-      // Panggil filter
       filterGames();
     }
 
     // Initial Render
     renderGames(gamesData);
+
+    // ===== AVATAR LOOPING (BERGANTI SETIAP 4 DETIK) =====
+    setInterval(() => {
+      // Cari semua kontainer avatar di layar dan perbarui isinya
+      const avatarContainers = document.querySelectorAll('.active-players');
+      avatarContainers.forEach(container => {
+        container.innerHTML = generateAvatarHTML();
+      });
+    }, 4000);
 
     // ===== REDIRECT TO ROBLOX =====
     function joinRobloxServer(targetUrl) {
