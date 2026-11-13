@@ -23,65 +23,77 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-bottom: 80px;
+      padding-top: 70px; /* Jarak untuk header yang fixed */
+      padding-bottom: 90px; /* Jarak untuk bottom nav */
     }
 
     .app-container {
       max-width: 600px;
       width: 100%;
-      padding: 20px;
+      padding: 10px 20px 20px 20px;
     }
 
-    /* ===== TOP HEADER ===== */
+    /* ===== TOP HEADER (FIXED & BLUR) ===== */
     .top-header {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      display: flex;
+      justify-content: center; /* Agar isi header ketengah */
+      background: rgba(255, 240, 245, 0.85); /* Transparan */
+      backdrop-filter: blur(12px); /* Efek kaca/blur */
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+    }
+    
+    .header-content {
+      max-width: 600px;
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
-      background-color: var(--bg-body);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 12px 20px;
     }
-    
+
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .logo-icon {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       background: var(--accent-gradient);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 18px;
+      font-size: 16px;
       color: white;
     }
 
     .logo-area h1 {
-      font-size: 1.3rem;
+      font-size: 1rem; /* Ukuran disamakan dengan logo C */
       font-weight: 800;
       color: #d63384;
+      letter-spacing: 0.5px;
     }
 
     .btn-verify {
       background: var(--accent-gradient);
       color: white;
       text-decoration: none;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       box-shadow: 0 4px 10px rgba(255, 102, 178, 0.3);
     }
+    .btn-verify svg { width: 14px; height: 14px; fill: white; }
 
     /* ===== TABS CONTENT ===== */
     .tab-content {
@@ -101,13 +113,24 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       color: var(--text-muted);
       border: 1px solid var(--border-color);
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.1);
     }
     
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      width: 100%;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+    .search-bar input::placeholder { color: var(--text-muted); }
     .search-bar svg { width: 18px; height: 18px; stroke: var(--text-muted); }
 
+    /* FILTER CHIPS */
     .filter-chips {
       display: flex;
       gap: 10px;
@@ -127,18 +150,21 @@
       white-space: nowrap;
       border: 1px solid var(--border-color);
       cursor: pointer;
+      transition: all 0.2s;
     }
     .chip.active {
       background: var(--accent-gradient);
       color: white;
       border: none;
       font-weight: 700;
+      box-shadow: 0 4px 10px rgba(255, 102, 178, 0.2);
     }
 
     .section-title {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 15px;
+      font-weight: 600;
     }
 
     /* GAME CARD */
@@ -150,6 +176,7 @@
       border: 1px solid var(--border-color);
       box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
       position: relative;
+      animation: fadeIn 0.4s ease;
     }
 
     .media-wrapper {
@@ -175,6 +202,7 @@
       border-radius: 12px;
       font-size: 0.75rem;
       font-weight: 600;
+      text-transform: capitalize;
     }
 
     /* Badge Featured Custom SVG */
@@ -438,16 +466,18 @@
     <div class="loading-log" id="loadingLog">Initializing website...</div>
   </div>
 
-  <!-- TOP HEADER -->
+  <!-- TOP HEADER (FIXED) -->
   <header class="top-header">
-    <div class="logo-area">
-      <div class="logo-icon">C</div>
-      <h1>CONDOGAME</h1>
+    <div class="header-content">
+      <div class="logo-area">
+        <div class="logo-icon">C</div>
+        <h1>CONDOGAME</h1>
+      </div>
+      <a href="#" class="btn-verify">
+        Have Fun
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </a>
     </div>
-    <a href="#" class="btn-verify">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      Verify
-    </a>
   </header>
 
   <div class="app-container">
@@ -458,83 +488,21 @@
       <!-- Search Bar -->
       <div class="search-bar">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        Search games...
+        <input type="text" id="searchInput" placeholder="Search games or genres..." onkeyup="filterGames()">
       </div>
 
-      <div class="filter-chips">
-        <div class="chip active">All</div>
-        <div class="chip">Roleplay</div>
-        <div class="chip">Romance</div>
-        <div class="chip">Action</div>
+      <!-- Filter Chips -->
+      <div class="filter-chips" id="genreChips">
+        <div class="chip active" onclick="filterGenre('All', this)">All</div>
+        <div class="chip" onclick="filterGenre('Romance', this)">Romance</div>
+        <div class="chip" onclick="filterGenre('Roleplay', this)">Roleplay</div>
+        <div class="chip" onclick="filterGenre('Action', this)">Action</div>
       </div>
 
-      <div class="section-title">3 games available</div>
+      <div class="section-title" id="gameCount">3 games available</div>
 
-      <!-- GAME 1 -->
-      <div class="game-card">
-        <div class="media-wrapper">
-          <span class="tag">Romance</span>
-          <div class="featured-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <video src="https://i.imgur.com/mDMLR61.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="card-body">
-          <div class="game-title">New Server Condo 1</div>
-          <div class="game-desc">In this game, you'll learn about pleasure ❤️</div>
-          
-          <div class="active-players" id="players1"></div>
-
-          <button class="btn-play" onclick="joinRobloxServer('server1')">
-            Play now 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- GAME 2 -->
-      <div class="game-card">
-        <div class="media-wrapper">
-          <span class="tag">Roleplay</span>
-          <div class="featured-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <video src="https://i.imgur.com/a40LH9A.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="card-body">
-          <div class="game-title">Chat with AI Emiko</div>
-          <div class="game-desc">Talk, interact, and hang out with the cutest AI.</div>
-          
-          <div class="active-players" id="players2"></div>
-
-          <button class="btn-play" onclick="joinRobloxServer('server2')">
-            Play now 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- GAME 3 -->
-      <div class="game-card">
-        <div class="media-wrapper">
-          <span class="tag">Action</span>
-          <div class="featured-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <video src="https://i.imgur.com/GjgpaRz.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="card-body">
-          <div class="game-title">Repacked Baddies</div>
-          <div class="game-desc">The ultimate hangout spot with the baddest crew.</div>
-          
-          <div class="active-players" id="players3"></div>
-
-          <button class="btn-play" onclick="joinRobloxServer('server3')">
-            Play now 
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-          </button>
-        </div>
-      </div>
+      <!-- Container untuk Game Cards yang akan di-render oleh JS -->
+      <div id="gamesContainer"></div>
 
     </div> <!-- End Tab Games -->
 
@@ -595,8 +563,7 @@
   </nav>
 
   <script>
-    // ===== PERBAIKAN PRELOADER (LANGSUNG JALAN) =====
-    // Menghapus window.addEventListener('load') agar langsung jalan tanpa nunggu video selesai download
+    // ===== PRELOADER LOGIC =====
     const preloader = document.getElementById('preloader');
     const progressBar = document.getElementById('progressBar');
     const logText = document.getElementById('loadingLog');
@@ -653,7 +620,35 @@
       element.classList.add('active');
     }
 
-    // ===== GENERATOR AVATAR STATIS BERTUMPUK =====
+    // ===== DATA GAMES =====
+    const gamesData = [
+      {
+        id: 'server1',
+        title: 'New Server Condo 1',
+        genre: 'Romance',
+        desc: "In this game, you'll learn about pleasure ❤️",
+        video: 'https://i.imgur.com/mDMLR61.mp4',
+        link: 'https://g5.lu/t6vgf'
+      },
+      {
+        id: 'server2',
+        title: 'Chat with AI Emiko',
+        genre: 'Roleplay',
+        desc: "Talk, interact, and hang out with the cutest AI.",
+        video: 'https://i.imgur.com/a40LH9A.mp4',
+        link: 'https://g5.lu/dd87v'
+      },
+      {
+        id: 'server3',
+        title: 'Repacked Baddies',
+        genre: 'Action',
+        desc: "The ultimate hangout spot with the baddest crew.",
+        video: 'https://i.imgur.com/GjgpaRz.mp4',
+        link: 'https://g5.lu/heebg'
+      }
+    ];
+
+    // Avatar generator
     const robloxAvatars = [
       'https://i.imgur.com/5mP0w6m.png', 
       'https://i.imgur.com/9sK4c2o.png', 
@@ -661,33 +656,90 @@
       'https://i.imgur.com/kXW2Y9m.png'  
     ];
 
-    function generateAvatars(containerId) {
-      const container = document.getElementById(containerId);
+    function generateAvatarHTML() {
       let html = '';
-      const count = Math.floor(Math.random() * 3) + 5; 
-      
+      const count = Math.floor(Math.random() * 3) + 5; // 5-7 avatars
       for(let i=0; i<count; i++) {
         const randomImg = robloxAvatars[Math.floor(Math.random() * robloxAvatars.length)];
         html += `<img src="${randomImg}" class="active-avatar" alt="Player">`;
       }
-      container.innerHTML = html;
+      return html;
     }
 
-    generateAvatars('players1');
-    generateAvatars('players2');
-    generateAvatars('players3');
+    // Render Games
+    let currentGenre = 'All';
+
+    function renderGames(gamesToRender) {
+      const container = document.getElementById('gamesContainer');
+      const countTitle = document.getElementById('gameCount');
+      
+      container.innerHTML = '';
+      countTitle.textContent = `${gamesToRender.length} games available`;
+
+      if (gamesToRender.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px 0;">No games found.</div>`;
+        return;
+      }
+
+      gamesToRender.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.innerHTML = `
+          <div class="media-wrapper">
+            <span class="tag">${game.genre}</span>
+            <div class="featured-badge">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <video src="${game.video}" autoplay loop muted playsinline></video>
+          </div>
+          <div class="card-body">
+            <div class="game-title">${game.title}</div>
+            <div class="game-desc">${game.desc}</div>
+            
+            <div class="active-players">
+              ${generateAvatarHTML()}
+            </div>
+
+            <button class="btn-play" onclick="joinRobloxServer('${game.link}')">
+              Play now 
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Filter Functions
+    function filterGames() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase();
+      
+      const filtered = gamesData.filter(game => {
+        const matchesSearch = game.title.toLowerCase().includes(searchText) || game.genre.toLowerCase().includes(searchText) || game.desc.toLowerCase().includes(searchText);
+        const matchesGenre = (currentGenre === 'All') || (game.genre === currentGenre);
+        return matchesSearch && matchesGenre;
+      });
+
+      renderGames(filtered);
+    }
+
+    function filterGenre(genre, element) {
+      // Update UI tombol
+      document.querySelectorAll('.chip').forEach(chip => chip.classList.remove('active'));
+      element.classList.add('active');
+
+      // Update State
+      currentGenre = genre;
+      
+      // Panggil filter
+      filterGames();
+    }
+
+    // Initial Render
+    renderGames(gamesData);
 
     // ===== REDIRECT TO ROBLOX =====
-    function joinRobloxServer(serverId) {
-      const urls = {
-        server1: 'https://g5.lu/t6vgf',
-        server2: 'https://g5.lu/dd87v',
-        server3: 'https://g5.lu/heebg'
-      };
-
-      const targetUrl = urls[serverId];
-      if (!targetUrl) return;
-
+    function joinRobloxServer(targetUrl) {
       const isAndroid = /Android/i.test(navigator.userAgent);
 
       if (isAndroid) {
